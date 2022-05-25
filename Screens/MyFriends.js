@@ -20,7 +20,8 @@ const MyFriends = () => {
   const dispatch = useDispatch();
   const myConnections = 'http://192.168.1.141:3000/connections///byName/';
   const userConfig = useSelector(state => state.userConfig);
-  const [listOfConf, setlistOfConf] = useState([]);
+  const listOfConf = useSelector(state => state.myFriends);
+
   const friendToSearch = useSelector(state => state.friendToSearch);
   const [friendName, setFriendName] = useState(friendToSearch);
   const [visibleMyRequests, setVisibleMyRequests] = useState(false);
@@ -35,7 +36,10 @@ const MyFriends = () => {
       if (friends.data.hasOwnProperty('msg')) {
         alert(friends.data.msg); // there are no connections?
       } else {
-        setlistOfConf([...friends.data]);
+        dispatch({
+          type: 'UPDATE_MY_FRIENDS',
+          myFriends: friends.data,
+        });
       }
     } catch (error) {
       alert(error);

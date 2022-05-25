@@ -14,7 +14,7 @@ const LogIn = ({navigation}) => {
   const userConf = 'http://192.168.1.141:3000/userConfiguration/';
   const setsURL = 'http://192.168.1.141:3000/dataFromSetsToClient';
   const dispatch = useDispatch();
-
+  const deviceToken = useSelector(state => state.deviceToken);
   const onLoadingPage = async event => {
     const response = await axios.get(`${setsURL}`);
     dispatch({
@@ -45,6 +45,7 @@ const LogIn = ({navigation}) => {
       const response = await axios.post(`${baseUrl}`, {
         email: email,
         password: password,
+        deviceToken: deviceToken,
       });
 
       if (response.data.hasOwnProperty('msg')) {

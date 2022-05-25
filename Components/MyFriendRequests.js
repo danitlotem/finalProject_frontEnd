@@ -59,16 +59,20 @@ const MyFriendRequests = props => {
         <Text>X</Text>
       </Pressable>
       <Text>My friend request</Text>
-      {listOfConf.map(item => {
-        return (
-          <UserItem
-            config={item}
-            key={`${item.user_id}`}
-            type={'requestsUserReceived'}
-            function={onConfirm}
-          />
-        );
-      })}
+      {
+        (console.log(listOfConf),
+        listOfConf &&
+          listOfConf.map(item => {
+            return (
+              <UserItem
+                config={item}
+                key={`${item.user_id}`}
+                type={'requestsUserReceived'}
+                function={onConfirm}
+              />
+            );
+          }))
+      }
     </View>
   );
 };

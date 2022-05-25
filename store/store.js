@@ -1,6 +1,7 @@
 import {createStore} from 'redux';
 //import {configureStore} from '@reduxjs/toolkit';
 let state = {
+  deviceToken: '',
   userConfig: {},
   email: '',
   fullName: '',
@@ -17,10 +18,17 @@ let state = {
     friends_only_filter: 0,
   },
   nearbyPeople: [],
+  myFriends: [],
   friendToSearch: '',
   myHobbies: [],
 };
 const Reducer = (state, action) => {
+  if (action.type === 'UPDATE_DEVICE_TOKEN') {
+    return {
+      ...state,
+      deviceToken: action.deviceToken,
+    };
+  }
   if (action.type === 'UPDATE_DEATAILS') {
     return {
       ...state,
@@ -49,6 +57,12 @@ const Reducer = (state, action) => {
     return {
       ...state,
       nearbyPeople: action.nearbyPeople,
+    };
+  }
+  if (action.type === 'UPDATE_MY_FRIENDS') {
+    return {
+      ...state,
+      myFriends: action.myFriends,
     };
   }
   if (action.type === 'FRIEND_TO_SEARCH') {

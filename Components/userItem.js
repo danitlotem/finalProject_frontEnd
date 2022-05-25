@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, Pressable, Modal} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  Modal,
+  Button,
+} from 'react-native';
 import UserProfile from './UserProfile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -17,9 +25,16 @@ const UserItem = props => {
       return <Ionicons name="chatbubble-ellipses-outline" size={30} />;
     }
     if (props.type === 'requestsUserSent') {
-      return <Ionicons name="add-circle-outline" size={30} />;
+      return <Button title={'Pending'} color={'orange'} />;
+      //return <Ionicons name="add-circle-outline" size={30} />;
     } else {
-      return <Ionicons name="send-outline" size={30} />;
+      return (
+        <Button
+          title={'Accept'}
+          color={'green'}
+          onPress={() => props.function(config.user_id)}
+        />
+      );
     }
   };
 
@@ -89,9 +104,6 @@ const UserItem = props => {
               justifyContent: 'center',
             }}>
             <Pressable onPress={() => onPressType()}>{typeIcon}</Pressable>
-            {/* <Pressable>
-              <Ionicons name="information-circle-outline" size={35} />
-            </Pressable> */}
           </View>
         </View>
       </Pressable>

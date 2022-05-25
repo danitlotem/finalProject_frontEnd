@@ -23,6 +23,7 @@ const NearbyPeople = ({navigation}) => {
           ...filters,
         },
       );
+      console.log(JSON.stringify(people.data, null, 2));
       dispatch({
         type: 'UPDATE_NEARBY_PEOPLE',
         nearbyPeople: people.data,
@@ -89,6 +90,7 @@ const NearbyPeople = ({navigation}) => {
                   key={index}
                   config={item}
                   name={`${item.first_name} ${item.last_name}`}
+                  type={'requestsUserSent'}
                 />
               );
             } else if (item.requestsUserRecieved === 1) {
@@ -97,6 +99,7 @@ const NearbyPeople = ({navigation}) => {
                   key={index}
                   config={item}
                   name={`${item.first_name} ${item.last_name}`}
+                  type={'requestsUserRecieved'}
                 />
               );
             } else if (item.notConnected === 1) {
