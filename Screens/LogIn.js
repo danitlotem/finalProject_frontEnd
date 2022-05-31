@@ -4,18 +4,23 @@ import {useSelector, useDispatch} from 'react-redux';
 import styles from '../Styles/LogInStyle';
 import axios from 'axios';
 import TInput from '../Components/TInput';
-import GetLocation from 'react-native-get-location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LogIn = ({navigation}) => {
   const [email, setEmail] = useState('');
+  const [deviceToken, setDeviceToken] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const baseUrl = 'http://192.168.1.141:3000/auth/login';
   const userConf = 'http://192.168.1.141:3000/userConfiguration/';
   const setsURL = 'http://192.168.1.141:3000/dataFromSetsToClient';
+
   const dispatch = useDispatch();
-  const deviceToken = useSelector(state => state.deviceToken);
   const onLoadingPage = async event => {
+    const fcmtoken = await AsyncStorage.getItem('fcmtoken');
+    console.log('fcmtoken', fcmtoken);
+    setDeviceToken(fcmtoken);
+
     const response = await axios.get(`${setsURL}`);
     dispatch({
       type: 'GET_RAW_TEXT',
@@ -42,10 +47,11 @@ const LogIn = ({navigation}) => {
   };
   const onSubmitFormHandler = async event => {
     try {
+      console.log('TOKEN', deviceToken);
       const response = await axios.post(`${baseUrl}`, {
         email: email,
         password: password,
-        deviceToken: deviceToken,
+        device_token: deviceToken,
       });
 
       if (response.data.hasOwnProperty('msg')) {

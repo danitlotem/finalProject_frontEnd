@@ -1,6 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
 
 export async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
@@ -13,25 +12,48 @@ export async function requestUserPermission() {
     GetFCMToken();
   }
 }
-async function GetFCMToken() {
-  const dispatch = useDispatch();
+const GetFCMToken = async () => {
   let fcmtoken = await AsyncStorage.getItem('fcmtoken');
-  console.log('old token', fcmtoken);
+  // console.log('old token', fcmtoken);
 
   if (!fcmtoken) {
     try {
-      fcmtoken = await messaging().getToken();
-      console.log(fcmtoken);
+      let fcmtoken = await messaging().getToken();
+      // console.log('PUSH NOTIFICATION 22', fcmtoken);
       if (!fcmtoken) {
-        console.log('new token', fcmtoken);
-        await AsyncStorage.setItem('fcmtoken', fcmtoken);
+        // console.log('new token 24', fcmtoken);
       }
-      dispatch({
-        type: 'UPDATE_DEVICE_TOKEN',
-        deviceToken: fcmtoken,
-      });
+      await AsyncStorage.setItem('fcmtoken', fcmtoken);
     } catch (error) {
       console.log(error, 'error in fcmtoken');
     }
   }
-}
+};
+
+export const NotificationListener = async () => {
+  // Assume a message-notification contains a "type" property in the data payload of the screen to open
+  console.log('*');
+  messaging().onNotificationOpenedApp(remoteMessage => {
+    console.log(
+      'Notification caused app to open from background state:',
+      remoteMessage.notification,
+    );
+  });
+  // Check whether an initial notification is available
+  messaging()
+    .getInitialNotification()
+    .then(remoteMessage => {
+      if (remoteMessage) {
+        console.log(
+          'Notification caused app to open from quit state:',
+          remoteMessage.notification,
+        );
+      }
+    });
+
+  console.log('****');
+
+  messaging().onMessage(async remoteMessage => {
+    console.log('notification on froground state...........', remoteMessage);
+  });
+};

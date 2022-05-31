@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   birthday: {
     padding: 7,
     flexDirection: 'column',
-    top: 50,
     alignItems: 'center',
 
     width: '100%',
@@ -86,8 +85,7 @@ const styles = StyleSheet.create({
     padding: 7,
     flexDirection: 'column',
     alignItems: 'center',
-    top: 70,
-    marginBottom: 120,
+    marginBottom: 50,
   },
   ButtonSection1: {
     width: 250,

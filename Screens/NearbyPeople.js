@@ -23,7 +23,7 @@ const NearbyPeople = ({navigation}) => {
           ...filters,
         },
       );
-      console.log(JSON.stringify(people.data, null, 2));
+      // console.log(JSON.stringify(people.data, null, 2));
       dispatch({
         type: 'UPDATE_NEARBY_PEOPLE',
         nearbyPeople: people.data,
@@ -38,8 +38,8 @@ const NearbyPeople = ({navigation}) => {
   }, [filters]);
 
   const onFriendRequest = async userNum => {
-    console.log('user_id', user_id);
-    console.log('userNum', userNum);
+    // console.log('user_id', user_id);
+    // console.log('userNum', userNum);
 
     try {
       const res = await axios.post(

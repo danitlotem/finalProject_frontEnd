@@ -9,18 +9,23 @@ import {
   Pressable,
 } from 'react-native';
 import {Divider} from 'react-native-paper';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Hobbies = props => {
   const listOfHobbies = useSelector(state => state.rawText.Hobbies);
+  const myHobbies = useSelector(state => state.myHobbies);
   const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const myHobbies = useSelector(state => state.myHobbies);
+  const dispatch = useDispatch();
+
   const addToList = val => {
-    props.list.push(val);
-    // console.log(props.list);
+    dispatch({
+      type: 'UPDATE_MY_HOBBIES',
+      myHobbies: [...myHobbies, val],
+    });
+    // console.log(myHobbies);
   };
   return (
     <View style={props.style}>
@@ -65,13 +70,7 @@ const Hobbies = props => {
                           padding: 2,
                         }}
                         key={index}
-                        onPress={() => {
-                          addToList(item),
-                            dispatch({
-                              type: 'UPDATE_MY_HOBBIES',
-                              myHobbies: listOfHobbies,
-                            });
-                        }}>
+                        onPress={() => addToList(item)}>
                         <Text>{item}</Text>
                       </TouchableOpacity>
                     );
@@ -107,6 +106,12 @@ const Hobbies = props => {
             alignSelf: 'center',
           }}
           name={'trash-outline'}
+          onPress={() => {
+            dispatch({
+              type: 'UPDATE_MY_HOBBIES',
+              myHobbies: [],
+            });
+          }}
         />
       </View>
     </View>

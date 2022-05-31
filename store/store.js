@@ -1,7 +1,6 @@
 import {createStore} from 'redux';
 //import {configureStore} from '@reduxjs/toolkit';
 let state = {
-  deviceToken: '',
   userConfig: {},
   email: '',
   fullName: '',
@@ -22,13 +21,8 @@ let state = {
   friendToSearch: '',
   myHobbies: [],
 };
+
 const Reducer = (state, action) => {
-  if (action.type === 'UPDATE_DEVICE_TOKEN') {
-    return {
-      ...state,
-      deviceToken: action.deviceToken,
-    };
-  }
   if (action.type === 'UPDATE_DEATAILS') {
     return {
       ...state,
@@ -37,6 +31,10 @@ const Reducer = (state, action) => {
       fullName: action.fullName,
       token: action.token,
     };
+  }
+  if (action.type === 'UPDATE_MAIN_PICTURE') {
+    const userConfig = {...state.userConfig, image: action.image};
+    return {...state, userConfig};
   }
   if (action.type === 'UPDATE_SEARCH_MODE') {
     return {...state, searchMode: action.searchMode};

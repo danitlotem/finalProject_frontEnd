@@ -13,6 +13,7 @@ import NearbyPeople from '../Screens/NearbyPeople';
 import Chats from '../Screens/Chats';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from '../Screens/Settings';
+import Notifications from '../Screens/Notifications';
 import FiltersBar from '../Screens/Filters';
 
 const MainDrawer = createDrawerNavigator();
@@ -27,7 +28,7 @@ const loggingToAppScreens = [
 ];
 
 const DrawerScreens = [
-  // {title: 'Log In', screen: LogInScreen, icon: 'log-in-outline'},
+  //{title: 'Log In', screen: LogInScreen, icon: 'log-in-outline'},
   // {title: 'SignUp', screen: SignUp1, icon: 'log-in-outline'},
   {title: 'Home', screen: Home, icon: 'home-outline'},
   {title: 'My Profile', screen: MyProfile, icon: 'person-circle-outline'},
@@ -36,6 +37,11 @@ const DrawerScreens = [
     title: 'Nearby People',
     screen: NearbyPeopleScreen,
     icon: 'magnet-outline',
+  },
+  {
+    title: 'Notifications',
+    screen: Notifications,
+    icon: 'notifications-outline',
   },
   {title: 'Chats', screen: Chats, icon: 'chatbox-ellipses-outline'},
   {title: 'Settings', screen: Settings, icon: 'settings-outline'},

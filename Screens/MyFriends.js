@@ -48,6 +48,9 @@ const MyFriends = () => {
 
   useEffect(() => {
     FindFriend();
+  }, []);
+  useEffect(() => {
+    FindFriend();
   }, [friendToSearch]);
 
   return (

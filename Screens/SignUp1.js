@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, Button} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Chip} from 'react-native-paper';
@@ -23,9 +23,10 @@ function SignUp1({navigation}) {
   const [gender, setGender] = useState('');
   const [sexualOrientation, setSexualOrientation] = useState('');
   const [relationshipStatus, setRelationshipStatus] = useState(0);
-  const [preferToBeCalled, setPreferToBeCalled] = useState(0);
+  const [pronoun, setPronoun] = useState(0);
   const baseUrl = 'http://192.168.1.141:3000/auth/register';
-  let hobbies = [];
+  let hobbies = useSelector(state => state.myHobbies);
+
   const [isEmailValid, setEmailValid] = useState(true);
   const [isFirstNameValid, setFirstNameValid] = useState(true);
   const [isLastNameValid, setLastNameValid] = useState(true);
@@ -35,20 +36,17 @@ function SignUp1({navigation}) {
   var month = date.getMonth() + 1;
   day = day.toString().padStart(2, '0');
   month = month.toString().padStart(2, '0');
-  //var day = date.getDate().padStart(2, '0');
-  //var month = (date.getMonth() + 1).padStart(2, '0');
+
   var year = date.getFullYear();
-  console.log(`${day}-${month}-${year}`);
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
   };
-  // const showMode = currentMode => {
-  //   setShow(true);
-  //   setMode(currentMode);
-  // };
 
+  useEffect(() => {
+    console.log(hobbies);
+  }, [hobbies]);
   const validateEmail = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(email) === false) {
@@ -89,7 +87,7 @@ function SignUp1({navigation}) {
         relationship_status: relationshipStatus,
         sexual_orientation: sexualOrientation,
         profession: profession,
-        pronoun: 1,
+        pronoun: pronoun,
         hobbies: [...hobbies],
         //FIX ME
         radius: 1000,
@@ -107,7 +105,7 @@ function SignUp1({navigation}) {
           fullName: `${response.data.first_name} ${response.data.last_name}`,
           token: response.data.token,
         });
-        navigation.navigate('HomeStack');
+        navigation.navigate('Log In stack');
       }
     } catch (error) {
       alert(error);
@@ -255,6 +253,29 @@ function SignUp1({navigation}) {
             })}
           </View>
         </View>
+        <View style={{top: 30, height: 150}}>
+          <Text style={{left: 40, color: '#0E6070', alignSelf: 'flex-start'}}>
+            pronoun
+          </Text>
+          <View style={styles.chipBlock}>
+            {rawText.pronoun.map(item => {
+              return (
+                <Chip
+                  key={item}
+                  style={{
+                    backgroundColor:
+                      pronoun === `${item}` ? '#0E6070' : '#EBEBEB',
+                  }}
+                  textStyle={{
+                    color: pronoun === `${item}` ? 'white' : '#0E6070',
+                  }}
+                  onPress={() => setPronoun(`${item}`)}>
+                  {item}
+                </Chip>
+              );
+            })}
+          </View>
+        </View>
 
         <View style={styles.birthday}>
           <Text style={{left: 35, color: '#0E6070', alignSelf: 'flex-start'}}>
@@ -282,7 +303,9 @@ function SignUp1({navigation}) {
           </Text>
           <Hobbies
             style={styles.Pressables}
-            text={'Pick your hobbies'}
+            text={
+              hobbies.length !== 0 ? hobbies.toString() : 'Pick your hobbies'
+            }
             data={rawText.Hobbies}
             list={hobbies}
           />

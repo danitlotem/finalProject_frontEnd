@@ -11,29 +11,30 @@ import axios from 'axios';
 const Home = ({navigation}) => {
   const [expanded, setExpanded] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const url = 'http://192.168.1.141:3000/userPictures/';
+  const url = 'http://192.168.1.141:3000/userPictures/main/';
   const userConfig = useSelector(state => state.userConfig);
 
-  const animation = useRef(null);
-  const [pressed, setPressed] = useState(false);
   const [visible, setVisible] = useState(false);
   const fullName = useSelector(state => state.fullName);
   const searchMode = useSelector(state => state.searchMode);
-  const searchModeOptions = useSelector(
-    state => state.rawText.filters.Search_Mode,
-  );
   const raw = useSelector(state => state.rawText);
+  const searchModeOptions = raw.filters.Search_Mode;
+
   const getPhotos = async () => {
     try {
       const userPhotos = await axios.get(`${url}${userConfig.user_id}`);
+      console.log(userPhotos.data);
       setPhotos(userPhotos.data);
+      if (photos.length === 0) {
+        setVisible(true);
+        console.log('******IN*******');
+      }
     } catch (error) {
       alert(error);
     }
   };
   const conf = useSelector(state => state.userConfig);
   const dispatch = useDispatch();
-  const isFocused = useIsFocused();
   const changeMode = item => {
     setExpanded(!expanded);
     dispatch({
@@ -53,36 +54,21 @@ const Home = ({navigation}) => {
     );
   });
 
-  // const handleAnimation = () => {
-  //   if (pressed === true) animation.current.play();
-  //   setTimeout(() => {
-  //     navigation.navigate('Nearby People');
-  //   }, 3000);
-  // };
-
-  // const onScreenLoad = () => {
-  //   animation.current.reset();
-  // };
-
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setPressed(false);
-  //     onScreenLoad();
-  //   }
-  // }, []);
-
   useEffect(() => {
+    console.log('visible ', visible);
+
+    setVisible(false);
     getPhotos();
-    if (photos.length === 0) {
-      setVisible(true);
-    }
+
+    console.log('visible ', visible);
   }, []);
 
   return (
     <View style={styles.container}>
       <View>
-        {photos === [] && (
-          <Modal transparent={true} visible={visible}>
+        {
+          //FIX ME - visible=visible
+          <Modal transparent={true} visible={false}>
             <View
               style={{
                 padding: 20,
@@ -99,28 +85,22 @@ const Home = ({navigation}) => {
               <SignUp2 hide={setVisible} />
             </View>
           </Modal>
-        )}
+        }
       </View>
       <View style={styles.innterContainer}>
         <Text style={styles.text}>Welcome {fullName}!</Text>
         <View>
-          <Pressable
-            style={styles.pressPic}
-            // onPress={() => {
-            //   setPressed(true);
-            //   pressed && handleAnimation();
-            // }}
-          >
+          <Pressable style={styles.pressPic}>
             <Avatar.Image
               size={150}
               style={styles.myPic}
               source={{uri: `data:image/gif;base64,${conf.image}`}}
             />
-            <LottieView
+            {/* <LottieView
               ref={animation}
               style={styles.lottiStyle}
               source={require('../Images/Shazam1.json')}
-            />
+            /> */}
           </Pressable>
         </View>
         <SafeAreaView style={styles.searchModeList}>
