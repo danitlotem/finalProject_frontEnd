@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React from 'react';
+import {View, Text, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../Styles/NotificationStyle';
 

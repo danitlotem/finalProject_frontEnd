@@ -10,9 +10,6 @@ const MyFriendRequests = props => {
   const user_id = useSelector(state => state.userConfig.user_id);
 
   const onConfirm = async userNum => {
-    console.log('user_id', user_id);
-    console.log('userNum', userNum);
-
     try {
       const res = await axios.post(
         `http://192.168.1.141:3000/friendRequest/approve/${user_id}/${userNum}`,
@@ -38,7 +35,6 @@ const MyFriendRequests = props => {
     }
   };
   useEffect(() => {
-    console.log('in');
     getMyFriendRequest();
   }, []);
 
@@ -59,20 +55,17 @@ const MyFriendRequests = props => {
         <Text>X</Text>
       </Pressable>
       <Text>My friend request</Text>
-      {
-        (console.log(listOfConf),
-        listOfConf &&
-          listOfConf.map(item => {
-            return (
-              <UserItem
-                config={item}
-                key={`${item.user_id}`}
-                type={'requestsUserReceived'}
-                function={onConfirm}
-              />
-            );
-          }))
-      }
+      {listOfConf &&
+        listOfConf.map(item => {
+          return (
+            <UserItem
+              config={item}
+              key={`${item.user_id}`}
+              type={'requestsUserReceived'}
+              function={onConfirm}
+            />
+          );
+        })}
     </View>
   );
 };

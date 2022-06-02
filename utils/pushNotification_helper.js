@@ -14,15 +14,10 @@ export async function requestUserPermission() {
 }
 const GetFCMToken = async () => {
   let fcmtoken = await AsyncStorage.getItem('fcmtoken');
-  // console.log('old token', fcmtoken);
 
   if (!fcmtoken) {
     try {
       let fcmtoken = await messaging().getToken();
-      // console.log('PUSH NOTIFICATION 22', fcmtoken);
-      if (!fcmtoken) {
-        // console.log('new token 24', fcmtoken);
-      }
       await AsyncStorage.setItem('fcmtoken', fcmtoken);
     } catch (error) {
       console.log(error, 'error in fcmtoken');
@@ -32,7 +27,6 @@ const GetFCMToken = async () => {
 
 export const NotificationListener = async () => {
   // Assume a message-notification contains a "type" property in the data payload of the screen to open
-  console.log('*');
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(
       'Notification caused app to open from background state:',
@@ -50,8 +44,6 @@ export const NotificationListener = async () => {
         );
       }
     });
-
-  console.log('****');
 
   messaging().onMessage(async remoteMessage => {
     console.log('notification on froground state...........', remoteMessage);

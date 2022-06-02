@@ -54,20 +54,13 @@ const UserItem = props => {
 
   return (
     <View style={styles.UserItem}>
-      <Modal transparent={true} visible={visible}>
-        <View
-          style={{
-            padding: 20,
-            elevation: 10,
-            backgroundColor: '#ffff',
-            height: '80%',
-            width: '90%',
-            marginTop: 80,
-            alignSelf: 'center',
-          }}>
-          <UserProfile {...props} closeModal={hideModal} />
-        </View>
-      </Modal>
+      <UserProfile
+        visible={visible}
+        setVisible={setVisible}
+        {...props}
+        closeModal={hideModal}
+      />
+
       <Pressable style={{flexDirection: 'row'}} onPress={showModal}>
         <View
           style={{

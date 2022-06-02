@@ -43,9 +43,7 @@ const AgeItem = props => {
               min={18}
               max={100}
               values={[min, max]}
-              //enableLabel={true}
               onValuesChangeFinish={values => {
-                //console.log('values:', values);
                 setMax(values[1]), setMin(values[0]), props.setAge(values);
               }}
             />

@@ -23,7 +23,6 @@ const NearbyPeople = ({navigation}) => {
           ...filters,
         },
       );
-      // console.log(JSON.stringify(people.data, null, 2));
       dispatch({
         type: 'UPDATE_NEARBY_PEOPLE',
         nearbyPeople: people.data,
@@ -38,9 +37,6 @@ const NearbyPeople = ({navigation}) => {
   }, [filters]);
 
   const onFriendRequest = async userNum => {
-    // console.log('user_id', user_id);
-    // console.log('userNum', userNum);
-
     try {
       const res = await axios.post(
         `http://192.168.1.141:3000/friendRequest/send/${user_id}/${userNum}`,
@@ -72,7 +68,7 @@ const NearbyPeople = ({navigation}) => {
         </Pressable>
       </View>
 
-      <View style={{height: '100%'}}>
+      <View>
         <ScrollView style={styles.scroll}>
           {nearbyPeople.map((item, index) => {
             if (item.mutualConnections === 1) {

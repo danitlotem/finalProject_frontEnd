@@ -6,24 +6,27 @@ import styles from '../../Styles/ChatStyle';
 import {TextInput} from 'react-native-paper';
 
 const MessageForm = () => {
-	const [value, setValue] = useState('');
+  const [value, setValue] = useState('');
+  const dispatch = useDispatch();
 
-	const dispatch = useDispatch();
+  const HandleSubmit = event => {
+    setValue('');
+  };
+  const HandleChange = event => {
+    setValue(event.target.value);
+  };
 
-	const HandleSubmit = (event) => {
-		// dispatch({type: 'MESSAGE_SENT', newMessage: value});
-		setValue('');
-	};
-	const HandleChange = (event) => {
-		setValue(event.target.value);
-	};
-
-	return (
-		<View>
-			<TextInput style={styles.messageInput} placeholder="Send a message ..." value={value} onChange={HandleChange} />
-			<Button title="submit" onPress={HandleSubmit} color="#841584" />
-		</View>
-	);
+  return (
+    <View>
+      <TextInput
+        style={styles.messageInput}
+        placeholder="Send a message ..."
+        value={value}
+        onChange={HandleChange}
+      />
+      <Button title="submit" onPress={HandleSubmit} color="#841584" />
+    </View>
+  );
 };
 
 export default MessageForm;

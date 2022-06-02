@@ -44,9 +44,6 @@ function SignUp1({navigation}) {
     setDate(currentDate);
   };
 
-  useEffect(() => {
-    console.log(hobbies);
-  }, [hobbies]);
   const validateEmail = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(email) === false) {

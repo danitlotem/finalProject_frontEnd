@@ -16,7 +16,7 @@ const CustomSidebarMenu = props => {
       <View style={{alignSelf: 'center', top: 50, marginBottom: 80}}>
         {Object.keys(userConfig).length !== 0 && (
           <View>
-            <Pressable onPress={() => navigation.navigate('MyProfile')}>
+            <Pressable onPress={() => navigation.navigate('My Profile')}>
               <Avatar.Image
                 size={110}
                 source={{uri: `data:image/gif;base64,${userConfig.image}`}}

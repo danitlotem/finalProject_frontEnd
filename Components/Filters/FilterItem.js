@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const FilterItem = props => {
-  const state = useSelector(state => state);
   const arr = props.arr.slice(1);
   const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
@@ -26,11 +25,10 @@ const FilterItem = props => {
           }}>
           <View
             style={{
-              flexDirection: 'column',
-              justifyContent: 'space-around',
-              //flexWrap: 'wrap',
-              alignItems: 'flex-start',
-
+              //flexDirection: 'column',
+              //justifyContent: 'space-around',
+              // flexWrap: 'wrap',
+              // alignItems: 'flex-start',
               marginTop: 50,
             }}>
             {arr.map(item => {
@@ -43,11 +41,11 @@ const FilterItem = props => {
                   }}>
                   <Text
                     style={{
-                      color: '#1B8AA0',
+                      color: item === props.value ? 'red' : '#1B8AA0',
                       backgroundColor: '#ffff',
                       elevation: 5,
-                      margin: 2,
-                      fontSize: 18,
+                      margin: 10,
+                      fontSize: 22,
                       alignSelf: 'center',
                     }}>
                     {item}

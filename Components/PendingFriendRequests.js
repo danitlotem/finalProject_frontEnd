@@ -22,7 +22,6 @@ const PendingFriendRequests = props => {
     }
   };
   useEffect(() => {
-    console.log('in');
     getMyFriendRequest();
   }, []);
   return (

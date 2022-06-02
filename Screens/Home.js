@@ -13,8 +13,8 @@ const Home = ({navigation}) => {
   const [photos, setPhotos] = useState([]);
   const url = 'http://192.168.1.141:3000/userPictures/main/';
   const userConfig = useSelector(state => state.userConfig);
-
   const [visible, setVisible] = useState(false);
+
   const fullName = useSelector(state => state.fullName);
   const searchMode = useSelector(state => state.searchMode);
   const raw = useSelector(state => state.rawText);
@@ -23,11 +23,9 @@ const Home = ({navigation}) => {
   const getPhotos = async () => {
     try {
       const userPhotos = await axios.get(`${url}${userConfig.user_id}`);
-      console.log(userPhotos.data);
       setPhotos(userPhotos.data);
-      if (photos.length === 0) {
-        setVisible(true);
-        console.log('******IN*******');
+      if (userPhotos.data.length === 0) {
+        setVisible(true); //BUG async commands
       }
     } catch (error) {
       alert(error);
@@ -55,37 +53,14 @@ const Home = ({navigation}) => {
   });
 
   useEffect(() => {
-    console.log('visible ', visible);
-
     setVisible(false);
     getPhotos();
-
-    console.log('visible ', visible);
   }, []);
 
   return (
     <View style={styles.container}>
       <View>
-        {
-          //FIX ME - visible=visible
-          <Modal transparent={true} visible={false}>
-            <View
-              style={{
-                padding: 20,
-                elevation: 10,
-                backgroundColor: '#ffff',
-                height: '80%',
-                width: '80%',
-                marginTop: 80,
-                marginLeft: 40,
-              }}>
-              <Pressable onPress={() => setVisible(!visible)}>
-                <Text style={{fontSize: 18}}>X</Text>
-              </Pressable>
-              <SignUp2 hide={setVisible} />
-            </View>
-          </Modal>
-        }
+        <SignUp2 visible={visible} setVisible={setVisible} />
       </View>
       <View style={styles.innterContainer}>
         <Text style={styles.text}>Welcome {fullName}!</Text>

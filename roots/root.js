@@ -15,11 +15,17 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from '../Screens/Settings';
 import Notifications from '../Screens/Notifications';
 import FiltersBar from '../Screens/Filters';
+import Conversation from '../Screens/Conversation';
 
 const MainDrawer = createDrawerNavigator();
 const NearbyPeopleStack = createStackNavigator();
 const LogInScreenStack = createStackNavigator();
+const chatsAndConvScreenStack = createStackNavigator();
 
+const ChatAndConversationsScreens = [
+  {title: 'ManageChats', screen: Chats},
+  {title: 'Conversation', screen: Conversation},
+];
 const loggingToAppScreens = [
   {title: 'Log In stack', screen: LogIn},
   {title: 'SignUp1', screen: SignUp1},
@@ -28,8 +34,6 @@ const loggingToAppScreens = [
 ];
 
 const DrawerScreens = [
-  //{title: 'Log In', screen: LogInScreen, icon: 'log-in-outline'},
-  // {title: 'SignUp', screen: SignUp1, icon: 'log-in-outline'},
   {title: 'Home', screen: Home, icon: 'home-outline'},
   {title: 'My Profile', screen: MyProfile, icon: 'person-circle-outline'},
   {title: 'My Friends', screen: MyFriends, icon: 'people-circle-outline'},
@@ -43,13 +47,18 @@ const DrawerScreens = [
     screen: Notifications,
     icon: 'notifications-outline',
   },
-  {title: 'Chats', screen: Chats, icon: 'chatbox-ellipses-outline'},
+  {
+    title: 'Chats',
+    screen: ChatsAndConvScreen,
+    icon: 'chatbox-ellipses-outline',
+  },
   {title: 'Settings', screen: Settings, icon: 'settings-outline'},
 ];
 
 function FiltersBarScreen() {
   return <FiltersBar />;
 }
+
 function NearbyPeopleScreen() {
   return (
     <NearbyPeopleStack.Navigator screenOptions={{headerShown: false}}>
@@ -58,6 +67,16 @@ function NearbyPeopleScreen() {
     </NearbyPeopleStack.Navigator>
   );
 }
+
+const chatAndConversationsItems = ChatAndConversationsScreens.map(item => {
+  return (
+    <MainDrawer.Screen
+      name={item.title}
+      component={item.screen}
+      key={item.screen}
+    />
+  );
+});
 
 const loggingToAppItems = loggingToAppScreens.map(item => {
   return (
@@ -80,6 +99,15 @@ const DrawerItems = DrawerScreens.map(item => {
   );
 });
 
+function ChatsAndConvScreen() {
+  return (
+    // <NavigationContainer>
+    <chatsAndConvScreenStack.Navigator screenOptions={{headerShown: false}}>
+      {chatAndConversationsItems}
+    </chatsAndConvScreenStack.Navigator>
+    // </NavigationContainer>
+  );
+}
 function LogInScreen() {
   return (
     <NavigationContainer>

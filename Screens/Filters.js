@@ -20,6 +20,7 @@ const FiltersBarDrawer = createDrawerNavigator();
 const CustomFiltersBar = props => {
   const myAge = useSelector(state => state.userConfig.age);
   const options = useSelector(state => state.rawText);
+  const filters = useSelector(state => state.filters);
 
   const [age, setAge] = useState([]);
   const [gender, setGender] = useState(options.filters.Gender[0]);
@@ -81,20 +82,27 @@ const CustomFiltersBar = props => {
           title={gender}
           arr={options.filters.Gender}
           function={setGender}
+          value={gender}
         />
         <FilterItem
           title={interestedIn}
           arr={options.filters.Interested_in}
           function={setInterestedIn}
+          value={interestedIn}
         />
         <FilterItem
           title={relationship}
           arr={options.registration_form.relationship_status}
           function={setRelationship}
+          value={relationship}
         />
         <Hobbies style={styles.viewStyle} list={hobbies} text={'Hobbies'} />
         <Radius setRadius={setRadius} />
-        <SearchMode title={searchMode} setSearchMode={setSearchMode} />
+        <SearchMode
+          value={searchMode}
+          title={searchMode}
+          setSearchMode={setSearchMode}
+        />
         <View
           style={{
             alignSelf: 'flex-start',

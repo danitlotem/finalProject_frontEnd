@@ -123,6 +123,14 @@ const styles = StyleSheet.create({
     borderColor: '#0E6070',
     marginBottom: 35,
   },
+  Pressables: {
+    height: 30,
+    width: '75%',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EBEBEB',
+  },
 });
 
 export default styles;

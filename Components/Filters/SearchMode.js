@@ -15,7 +15,13 @@ const searchModeItems = props => {
         style={{marginTop: 20}}
         key={index}
         onPress={() => props.setSearchMode(item)}>
-        <Text style={{fontSize: 18}}>{item}</Text>
+        <Text
+          style={{
+            fontSize: 18,
+            color: item === props.value ? 'red' : '#1B8AA0',
+          }}>
+          {item}
+        </Text>
       </Pressable>
     );
   });

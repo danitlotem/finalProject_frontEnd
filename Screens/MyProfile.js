@@ -10,6 +10,7 @@ import {
 import DatePicker from 'react-native-datepicker';
 import {Chip, Avatar} from 'react-native-paper';
 import Hobbies from '../Components/Filters/Hobbies';
+import ImageCard from '../Components/imageCard';
 import TInput from '../Components/TInput';
 import styles from '../Styles/MyProfileStyle';
 import {useSelector} from 'react-redux';
@@ -20,13 +21,19 @@ import axios from 'axios';
 const MyProfile = () => {
   // const [date, setDate] = useState();
   const [edit, setEdit] = useState(false);
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
   const [photos, setPhotos] = useState([]);
   const state = useSelector(state => state);
   const userConfig = useSelector(state => state.userConfig);
   const hobbies = userConfig.hobbies;
   const url = 'http://192.168.1.141:3000/userPictures/';
   const rawText = useSelector(state => state.rawText.registration_form);
+  const myhobbies = useSelector(state => state.myHobbies);
 
+  const setVisibleArr = [setVisible1, setVisible2, setVisible3];
+  const visibleArr = [visible1, visible2, visible3];
   const getPhotos = async () => {
     try {
       const photos = await axios.get(`${url}${userConfig.user_id}`);
@@ -60,21 +67,19 @@ const MyProfile = () => {
           }}>
           {photos.map(item => {
             return (
-              <Avatar.Image
-                size={80}
-                key={photos.fileName}
-                style={styles.myPic}
-                source={{uri: `data:image/gif;base64,${item.image}`}}
-              />
+              <View key={photos.fileName}>
+                {/* FIX ME add pic modal - modal is ready to use */}
+                <Pressable>
+                  <Avatar.Image
+                    size={80}
+                    style={styles.myPic}
+                    source={{uri: `data:image/gif;base64,${item.image}`}}
+                  />
+                </Pressable>
+              </View>
             );
           })}
 
-          {/* <Pressable onPress={() => console.log('plus pressed')}>
-            <Image
-              style={styles.addPic}
-              source={require('../Images/plus.png')}
-            />
-          </Pressable> */}
           <Pressable
             style={styles.touchablePen}
             onPress={() => {
@@ -195,6 +200,37 @@ const MyProfile = () => {
             })}
           </View>
         </View>
+        <View>
+          {/* FIX ME - pronoun */}
+          <Text style={{left: 40, color: '#0E6070'}}>pronoun</Text>
+          <View
+            style={{
+              top: 10,
+              left: 40,
+              justifyContent: 'space-evenly',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              width: '80%',
+              height: 80,
+            }}>
+            {rawText.pronoun.map(item => {
+              return (
+                <Chip
+                  key={item}
+                  style={{
+                    backgroundColor:
+                      userConfig.pronoun === `${item}` ? '#0E6070' : '#EBEBEB',
+                  }}
+                  textStyle={{
+                    color:
+                      userConfig.pronoun === `${item}` ? 'white' : '#0E6070',
+                  }}>
+                  {item}
+                </Chip>
+              );
+            })}
+          </View>
+        </View>
         <View style={{top: 10}}>
           <Text style={{left: 40, color: '#0E6070'}}>
             My relationship status
@@ -262,11 +298,26 @@ const MyProfile = () => {
             }}
           />
         </View>
-        <View style={styles.Hobbies}>
+        {/* <View style={styles.Hobbies}>
           <Text style={{left: 40, color: '#0E6070', alignSelf: 'flex-start'}}>
             My hobbies are:
           </Text>
           <SafeAreaView style={{width: '90%'}}>{items}</SafeAreaView>
+        </View> */}
+        <View style={styles.Hobbies}>
+          <Text style={{left: 35, color: '#0E6070', alignSelf: 'flex-start'}}>
+            My hobbies are:
+          </Text>
+          <Hobbies
+            style={styles.Pressables}
+            text={
+              myhobbies.length !== 0
+                ? myhobbies.toString()
+                : 'Pick your hobbies'
+            }
+            data={rawText.Hobbies}
+            list={myhobbies}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

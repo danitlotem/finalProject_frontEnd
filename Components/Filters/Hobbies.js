@@ -25,7 +25,6 @@ const Hobbies = props => {
       type: 'UPDATE_MY_HOBBIES',
       myHobbies: [...myHobbies, val],
     });
-    // console.log(myHobbies);
   };
   return (
     <View style={props.style}>

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     top: 10,
-    height: 200,
+    height: 500,
     padding: 7,
   },
   textInput: {
