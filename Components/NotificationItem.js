@@ -3,7 +3,7 @@ import {View, Text, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../Styles/NotificationStyle';
 
-const NotificationItem = () => {
+const NotificationItem = props => {
   return (
     <View style={styles.item}>
       <Pressable style={styles.Pressables}>
@@ -21,14 +21,12 @@ const NotificationItem = () => {
       </Pressable>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.Details}>
-          <Text style={styles.title}>Title</Text>
-          <Text style={styles.body}>Body</Text>
+          <Text style={styles.title}>{props.details.title}</Text>
+          <Text style={styles.body}>{props.details.content}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: 'center',
-          }}>
-          <Text>creation date</Text>
+        <View>
+          {/* BUG - OUT OF SCREEN RANGE */}
+          <Text>{props.details.creation_date}</Text>
         </View>
       </View>
     </View>

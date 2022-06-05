@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   title: {
-    fontSize: 22,
+    fontSize: 16,
     fontWeight: 'bold',
     alignItems: 'flex-start',
     color: '#2B7CAD',
   },
   body: {
-    fontSize: 18,
+    fontSize: 16,
     alignItems: 'flex-start',
     color: '#105A87',
     fontWeight: 'bold',

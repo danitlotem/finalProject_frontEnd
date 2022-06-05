@@ -51,7 +51,7 @@ const MyFriends = () => {
   }, []);
   useEffect(() => {
     FindFriend();
-  }, [friendToSearch]);
+  }, [friendToSearch, visibleMyRequests, visiblePendingRequests]);
 
   return (
     <View style={styles.container}>

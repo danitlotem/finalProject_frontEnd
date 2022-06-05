@@ -9,11 +9,12 @@ const MyFriendRequests = props => {
   const [listOfConf, setlistOfConf] = useState([]);
   const user_id = useSelector(state => state.userConfig.user_id);
 
-  const onConfirm = async userNum => {
+  const onAccept = async userNum => {
     try {
       const res = await axios.post(
         `http://192.168.1.141:3000/friendRequest/approve/${user_id}/${userNum}`,
       );
+      getMyFriendRequest();
       alert('GOOD🥳');
     } catch (error) {
       alert(error);
@@ -62,7 +63,7 @@ const MyFriendRequests = props => {
               config={item}
               key={`${item.user_id}`}
               type={'requestsUserReceived'}
-              function={onConfirm}
+              function={onAccept}
             />
           );
         })}

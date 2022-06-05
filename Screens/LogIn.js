@@ -83,6 +83,7 @@ const LogIn = ({navigation}) => {
           //   // connection opened
           //   socket.send('something'); // send a message
           // };
+          console.log('IN');
           navigation.navigate('HomeStack');
         } catch (error) {
           alert(error);
