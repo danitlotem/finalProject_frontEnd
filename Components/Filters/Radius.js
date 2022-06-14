@@ -15,7 +15,6 @@ const Radius = props => {
         <View
           style={{
             padding: 20,
-            // justifyContent: 'center',
             elevation: 10,
             backgroundColor: '#ffff',
             height: '80%',
@@ -57,19 +56,19 @@ const Radius = props => {
         </View>
       </Modal>
       <Pressable title={'Mode'} onPress={showModal}>
-        <Text>Radius</Text>
+        <Text style={{color: '#FFFFFF', fontSize: 16}}>Radius</Text>
       </Pressable>
     </View>
   );
 };
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: '#B3D8D4',
+    backgroundColor: '#61AF9B',
     padding: 7,
     margin: 5,
-    borderRadius: 15,
+    borderRadius: 5,
     width: 140,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#0E6070',
     elevation: 5,
   },

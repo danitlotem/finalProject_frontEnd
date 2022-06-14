@@ -4,6 +4,7 @@ import {
   Text,
   Modal,
   Button,
+  StyleSheet,
   TouchableOpacity,
   ScrollView,
   Pressable,
@@ -29,27 +30,11 @@ const Hobbies = props => {
   return (
     <View style={props.style}>
       <Modal transparent={true} visible={visible}>
-        <View
-          style={{
-            padding: 20,
-            elevation: 10,
-            backgroundColor: '#ffff',
-            height: '80%',
-            width: '80%',
-            marginTop: 80,
-            marginLeft: 40,
-          }}>
+        <View style={styles.modal}>
           <View style={{top: 20, alignSelf: 'center', position: 'absolute'}}>
             <Text style={{fontSize: 18}}>Hobbies</Text>
           </View>
-          <ScrollView
-            style={{
-              top: 20,
-              alignSelf: 'center',
-              height: 100,
-              width: '100%',
-              marginVertical: 30,
-            }}>
+          <ScrollView style={styles.scrollView}>
             {[...listOfHobbies].slice(1).map((element, elmIndx) => {
               return (
                 <View key={elmIndx}>
@@ -85,36 +70,42 @@ const Hobbies = props => {
         </View>
       </Modal>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Pressable
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-          title={'Mode'}
-          onPress={showModal}>
-          <Text>{props.text}</Text>
+        <Pressable style={{alignSelf: 'center'}} onPress={showModal}>
+          <Text style={{color: '#286f6d', fontSize: 16}}>{props.text}</Text>
         </Pressable>
-        <Ionicons
-          color={'#1B8AA0'}
-          size={18}
-          style={{
-            marginTop: -10,
-            marginBottom: -10,
-            left: 30,
-            alignSelf: 'center',
-          }}
-          name={'trash-outline'}
-          onPress={() => {
-            dispatch({
-              type: 'UPDATE_MY_HOBBIES',
-              myHobbies: [],
-            });
-          }}
-        />
+        <View style={{}}>
+          <Ionicons
+            color={'red'}
+            size={22}
+            name={'trash-outline'}
+            onPress={() => {
+              dispatch({
+                type: 'UPDATE_MY_HOBBIES',
+                myHobbies: [],
+              });
+            }}
+          />
+        </View>
       </View>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  modal: {
+    padding: 20,
+    elevation: 10,
+    backgroundColor: '#ffff',
+    height: '80%',
+    width: '80%',
+    marginTop: 80,
+    marginLeft: 40,
+  },
+  scrollView: {
+    top: 20,
+    alignSelf: 'center',
+    height: 100,
+    width: '100%',
+    marginVertical: 30,
+  },
+});
 export default Hobbies;

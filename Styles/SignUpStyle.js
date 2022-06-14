@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
+
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#fff',
+    height: Theme.height,
+    width: Theme.width,
+    backgroundColor: Theme.background,
   },
   emailPassword: {
     width: '100%',
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     alignSelf: 'center',
     marginTop: 25,
-    color: '#0E6070',
+    color: '#ffffff',
   },
   pic: {
     height: 80,

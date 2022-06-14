@@ -15,15 +15,13 @@ import TInput from '../Components/TInput';
 import styles from '../Styles/MyProfileStyle';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
+import UpperBar from '../Components/UpperBar';
 
 //FIX ME ליצור אובייקט שישמש כסטייט זמני וכשלוחצים על כפתור הוא יחליף את הקונפיגורציה בסטייט ובשרת
 
-const MyProfile = () => {
-  // const [date, setDate] = useState();
+const MyProfile = ({navigation}) => {
   const [edit, setEdit] = useState(false);
-  const [visible1, setVisible1] = useState(false);
-  const [visible2, setVisible2] = useState(false);
-  const [visible3, setVisible3] = useState(false);
+
   const [photos, setPhotos] = useState([]);
   const state = useSelector(state => state);
   const userConfig = useSelector(state => state.userConfig);
@@ -32,8 +30,6 @@ const MyProfile = () => {
   const rawText = useSelector(state => state.rawText.registration_form);
   const myhobbies = useSelector(state => state.myHobbies);
 
-  const setVisibleArr = [setVisible1, setVisible2, setVisible3];
-  const visibleArr = [visible1, visible2, visible3];
   const getPhotos = async () => {
     try {
       const photos = await axios.get(`${url}${userConfig.user_id}`);
@@ -47,23 +43,15 @@ const MyProfile = () => {
     getPhotos();
   }, []);
 
-  const items = [hobbies].map((item, index) => {
-    return (
-      <Text style={{marginTop: 4, left: 25}} key={index}>
-        {item}
-      </Text>
-    );
-  });
-
   return (
     <SafeAreaView style={styles.container}>
+      <UpperBar title={'My Profile'} />
       <ScrollView>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
             alignItems: 'center',
-            marginTop: 10,
           }}>
           {photos.map(item => {
             return (
@@ -137,7 +125,7 @@ const MyProfile = () => {
           value={userConfig.profession}
           editable={edit}
         />
-        <View>
+        <View style={{marginTop: 20}}>
           <Text style={{left: 40, marginBottom: 10, color: '#0E6070'}}>
             I identify as
           </Text>
@@ -165,24 +153,17 @@ const MyProfile = () => {
           </View>
         </View>
         <View>
-          <Text style={{left: 40, color: '#0E6070'}}>
+          <Text style={{left: 40, color: '#0E6070', marginTop: 20}}>
             I prefer to be called
           </Text>
-          <View
-            style={{
-              top: 10,
-              left: 40,
-              justifyContent: 'space-evenly',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              width: '80%',
-              height: 80,
-            }}>
+          <View style={styles.chipsBlocks}>
             {rawText.sexual_orientation.map(item => {
               return (
                 <Chip
                   key={item}
                   style={{
+                    margin: 2,
+
                     backgroundColor:
                       userConfig.sexual_orientation === `${item}`
                         ? '#0E6070'
@@ -202,22 +183,16 @@ const MyProfile = () => {
         </View>
         <View>
           {/* FIX ME - pronoun */}
-          <Text style={{left: 40, color: '#0E6070'}}>pronoun</Text>
-          <View
-            style={{
-              top: 10,
-              left: 40,
-              justifyContent: 'space-evenly',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              width: '80%',
-              height: 80,
-            }}>
+          <Text style={{left: 40, color: '#0E6070', marginTop: 20}}>
+            pronoun
+          </Text>
+          <View style={styles.chipsBlocks}>
             {rawText.pronoun.map(item => {
               return (
                 <Chip
                   key={item}
                   style={{
+                    margin: 2,
                     backgroundColor:
                       userConfig.pronoun === `${item}` ? '#0E6070' : '#EBEBEB',
                   }}
@@ -235,21 +210,13 @@ const MyProfile = () => {
           <Text style={{left: 40, color: '#0E6070'}}>
             My relationship status
           </Text>
-          <View
-            style={{
-              top: 20,
-              left: 40,
-              justifyContent: 'space-evenly',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              width: '80%',
-              height: 150,
-            }}>
+          <View style={styles.chipsBlocks}>
             {rawText.relationship_status.map(item => {
               return (
                 <Chip
                   key={item}
                   style={{
+                    margin: 2,
                     backgroundColor:
                       userConfig.relationship_status === `${item}`
                         ? '#0E6070'
@@ -268,11 +235,11 @@ const MyProfile = () => {
           </View>
         </View>
         <View style={styles.birthday}>
+          <Text>birthday🎈🎉✨</Text>
           <DatePicker
             style={{
               width: '80%',
-              position: 'absolute',
-              alignSelf: 'center',
+              marginTop: 10,
             }}
             date={state.userConfig.date_of_birth}
             mode={'date'}
@@ -282,28 +249,15 @@ const MyProfile = () => {
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0,
-              },
-              dateInput: {
-                marginLeft: 36,
-                backgroundColor: 'white',
-              },
+              dateIcon: styles.dateIcon,
+              dateInput: styles.dateInput,
             }}
             onDateChange={date => {
               setBirthday(date);
             }}
           />
         </View>
-        {/* <View style={styles.Hobbies}>
-          <Text style={{left: 40, color: '#0E6070', alignSelf: 'flex-start'}}>
-            My hobbies are:
-          </Text>
-          <SafeAreaView style={{width: '90%'}}>{items}</SafeAreaView>
-        </View> */}
+
         <View style={styles.Hobbies}>
           <Text style={{left: 35, color: '#0E6070', alignSelf: 'flex-start'}}>
             My hobbies are:

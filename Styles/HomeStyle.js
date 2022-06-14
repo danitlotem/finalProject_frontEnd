@@ -1,43 +1,37 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#B3D8DF',
+    height: Theme.height,
+    width: Theme.width,
+    backgroundColor: Theme.background,
   },
-  viewStyle: {
-    backgroundColor: '#B3D8D4',
-    padding: 7,
-    margin: 5,
-    borderRadius: 15,
-    width: 150,
-    borderWidth: 2,
-    borderColor: '#0E6070',
-    elevation: 5,
-  },
+
   menuPic: {
     marginLeft: 15,
     marginTop: 50,
-    height: 18,
-    width: 18,
+    height: 22,
+    width: 22,
   },
   innterContainer: {
     alignItems: 'center',
   },
   text: {
-    color: '#0E6070',
+    color: '#FFFFFF',
     fontSize: 30,
     top: 20,
   },
   myPic: {
-    position: 'absolute',
-    height: 150,
-    width: 150,
+    height: 170,
+    width: 170,
     alignSelf: 'center',
     zIndex: 1,
+    borderColor: '#FFFFFF',
+    borderWidth: 3,
+    elevation: 10,
+    borderRadius: 85,
   },
   pressPic: {
-    position: 'absolute',
     alignSelf: 'center',
     justifyContent: 'center',
     height: 220,
@@ -45,14 +39,12 @@ const styles = StyleSheet.create({
     top: 30,
   },
   searchModeList: {
-    top: 300,
-    position: 'absolute',
+    marginTop: 20,
     backgroundColor: 'white',
     elevation: 10,
     width: '70%',
   },
   lottiStyle: {
-    position: 'absolute',
     alignSelf: 'center',
     zIndex: 0,
     height: 250,

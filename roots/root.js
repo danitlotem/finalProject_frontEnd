@@ -101,11 +101,9 @@ const DrawerItems = DrawerScreens.map(item => {
 
 function ChatsAndConvScreen() {
   return (
-    // <NavigationContainer>
     <chatsAndConvScreenStack.Navigator screenOptions={{headerShown: false}}>
       {chatAndConversationsItems}
     </chatsAndConvScreenStack.Navigator>
-    // </NavigationContainer>
   );
 }
 function LogInScreen() {
@@ -120,6 +118,7 @@ function LogInScreen() {
 function DrawerNavi() {
   return (
     <MainDrawer.Navigator
+      screenOptions={{headerShown: false}}
       drawerContent={props => <CustomSidebarMenu {...props} />}>
       {DrawerItems}
     </MainDrawer.Navigator>

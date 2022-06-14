@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#B3D8DF',
+    height: Theme.height,
+    width: Theme.width,
+    backgroundColor: Theme.background,
   },
   scroll: {
     height: '85%',
-    // padding: 7,
   },
   ButtonSection: {
     width: '85%',
@@ -44,11 +44,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   fullName: {
-    width: '90%',
+    width: '85%',
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    height: 40,
   },
   title: {
     color: '#0E6070',
@@ -56,10 +57,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textInput: {
-    width: '90%',
+    width: '85%',
+    height: 40,
     alignSelf: 'center',
-    // marginBottom: 10,
     marginTop: 10,
+    backgroundColor: 'white',
+    elevation: 10,
+    borderRadius: 10,
   },
   notValidField: {
     left: 10,
@@ -67,69 +71,60 @@ const styles = StyleSheet.create({
   },
   nameInput: {
     width: 150,
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    elevation: 10,
+    borderRadius: 10,
   },
   birthday: {
-    padding: 7,
-    flexDirection: 'row',
-    top: 50,
+    marginTop: 100,
+    flexDirection: 'column',
     left: 40,
   },
   Hobbies: {
     flexDirection: 'column',
     padding: 7,
     alignItems: 'center',
-    top: 70,
+    top: 20,
     marginBottom: 120,
   },
-  ButtonSection1: {
-    width: 250,
-    height: 70,
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-  },
+
   subText: {
     alignSelf: 'center',
   },
-  title: {
-    color: '#0E6070',
-    fontSize: 36,
-    alignSelf: 'center',
-  },
-  pic: {
-    height: 80,
-    width: 80,
-    margin: 15,
-    borderWidth: 2,
-    borderColor: '#0E6070',
-    borderRadius: 40,
-    elevation: 10,
-  },
+
   addPicSection: {
     flexDirection: 'column',
     top: 30,
     alignItems: 'center',
   },
-  ButtonSection2: {
-    position: 'absolute',
-    top: 550,
-    width: 150,
-    height: 70,
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-  },
-  cameraButton: {
-    borderRadius: 40,
-    borderWidth: 2,
-    borderColor: '#0E6070',
-    marginBottom: 35,
-  },
   Pressables: {
-    height: 30,
-    width: '75%',
+    backgroundColor: 'white',
     borderRadius: 5,
+    marginLeft: 38,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#EBEBEB',
+    height: 35,
+    width: 250,
+  },
+  chipsBlocks: {
+    top: 10,
+    left: 20,
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '90%',
+    height: 80,
+  },
+  dateIcon: {
+    position: 'absolute',
+    left: 0,
+    top: 4,
+    marginLeft: 0,
+  },
+  dateInput: {
+    marginLeft: 35,
+    borderRadius: 5,
+    backgroundColor: 'white',
   },
 });
 

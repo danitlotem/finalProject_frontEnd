@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
 import UserItem from '../Components/userItem';
+import UpperBar from '../Components/UpperBar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../Styles/NearbyPeople';
 import {useSelector, useDispatch} from 'react-redux';
@@ -8,6 +9,7 @@ import axios from 'axios';
 
 const NearbyPeople = ({navigation}) => {
   const dispatch = useDispatch();
+
   const user_id = useSelector(state => state.userConfig.user_id);
   const filters = useSelector(state => state.filters);
   const nearbyPeople = useSelector(state => state.nearbyPeople);
@@ -50,6 +52,7 @@ const NearbyPeople = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <UpperBar title={'Nearby people'} />
       <View
         style={{
           height: 50,

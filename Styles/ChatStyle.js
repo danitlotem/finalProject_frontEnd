@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 6,
     maxWidth: '60%',
-    // float: 'left',
     backgroundColor: '#CDEAE2',
     marginLeft: 4,
   },
@@ -90,9 +89,7 @@ const styles = StyleSheet.create({
   },
 
   Details: {
-    right: 10,
-    width: 270,
-
+    width: 220,
     justifyContent: 'flex-start',
   },
   title: {

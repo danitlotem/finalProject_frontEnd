@@ -1,13 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useIsFocused} from '@react-navigation/native';
-import {View, Text, Pressable, SafeAreaView, Modal, Button} from 'react-native';
-import {List} from 'react-native-paper';
-import LottieView from 'lottie-react-native';
-import styles from '../Styles/HomeStyle';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Pressable, SafeAreaView, Image} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {Avatar} from 'react-native-paper';
+import {List} from 'react-native-paper';
 import SignUp2 from './SignUp2';
+import styles from '../Styles/HomeStyle';
 import axios from 'axios';
+import UpperBar from '../Components/UpperBar';
+
 const Home = ({navigation}) => {
   const [expanded, setExpanded] = useState(false);
   const [photos, setPhotos] = useState([]);
@@ -62,12 +61,12 @@ const Home = ({navigation}) => {
       <View>
         <SignUp2 visible={visible} setVisible={setVisible} />
       </View>
+      <UpperBar title={'Home'} />
       <View style={styles.innterContainer}>
         <Text style={styles.text}>Welcome {fullName}!</Text>
         <View>
           <Pressable style={styles.pressPic}>
-            <Avatar.Image
-              size={150}
+            <Image
               style={styles.myPic}
               source={{uri: `data:image/gif;base64,${conf.image}`}}
             />

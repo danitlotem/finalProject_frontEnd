@@ -117,27 +117,34 @@ const LogIn = ({navigation}) => {
         />
       </View>
       <View style={styles.linkToRegister}>
-        <Text style={{color: 'gray'}}>Don't have a user? </Text>
+        <Text style={{color: '#FFFFFF'}}>Don't have a user? </Text>
         <Pressable
           style={({pressed}) => ({
-            backgroundColor: pressed ? 'lightskyblue' : 'white',
+            backgroundColor: pressed ? 'lightskyblue' : '#61AF9B',
           })}
           onPress={reDirectToRegister}>
-          <Text style={{color: '#0E6070', fontWeight: 'bold'}}>
-            Create a Account
+          <Text style={{color: '#005252', fontWeight: 'bold'}}>
+            Create an account
           </Text>
         </Pressable>
       </View>
       <View style={styles.buttonSection}>
-        <Button
+        <Pressable
           style={styles.button}
           disabled={!validEmail}
-          color="#0E6070"
-          title="Continue"
           onPress={() => {
             onSubmitFormHandler();
-          }}
-        />
+          }}>
+          <Text
+            style={{
+              alignSelf: 'center',
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: '#FFFFFF',
+            }}>
+            Continue
+          </Text>
+        </Pressable>
       </View>
     </View>
   );

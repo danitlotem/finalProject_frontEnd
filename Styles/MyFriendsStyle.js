@@ -1,49 +1,70 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#B3D8DF',
-    padding: 15,
-    height: '100%',
-    width: '100%',
+    backgroundColor: Theme.background,
+    height: Theme.height,
+    width: Theme.width,
   },
-
-  filterIcon: {
-    height: 18,
-    width: 18,
-    margin: 7,
-  },
-  scroll: {
-    height: 200,
-    padding: 7,
+  searchFriend: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    left: 5,
+    width: '98%',
   },
   textInput: {
     padding: 4,
-    width: 240,
+    width: 220,
     backgroundColor: '#fff',
     borderColor: 'darkgray',
     borderWidth: 1,
     borderRadius: 5,
   },
-  menuPic: {
-    marginLeft: 15,
-    marginTop: 15,
-    height: 18,
-    width: 18,
+  searchButton: {
+    width: 70,
+    borderRadius: 5,
+    backgroundColor: '#005252',
+    justifyContent: 'center',
+  },
+  searchText: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+
+  scroll: {
+    height: 200,
+    padding: 7,
+  },
+  trashIcon: {
+    backgroundColor: 'white',
+    elevation: 10,
+    padding: 7,
+    width: 35,
+    height: 35,
+    borderRadius: 5,
+  },
+  pressableContaner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    left: 10,
+    width: '95%',
   },
   requestPressable: {
-    width: 170,
-    backgroundColor: 'white',
+    width: 150,
+    backgroundColor: '#007c7c',
     elevation: 10,
     borderRadius: 5,
     justifyContent: 'center',
-    height: 30,
-    backgroundColor: '#8ECFD8',
-    borderColor: '#086875',
+    borderColor: '#FFFFFF',
     borderWidth: 1,
+    height: 30,
   },
   requestText: {
     alignSelf: 'center',
-    color: '#0E6070',
+    color: '#ffffff',
     fontWeight: 'bold',
   },
 });

@@ -61,7 +61,7 @@ const AgeItem = props => {
           }}
           onPress={showModal}>
           {/* FIX ME -  stateFilters.age_filter !== [] only after apply*/}
-          <Text>
+          <Text style={{color: '#FFFFFF', fontSize: 16}}>
             {min}-{max}
           </Text>
         </Pressable>
@@ -90,12 +90,12 @@ const AgeItem = props => {
 };
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: '#B3D8D4',
+    backgroundColor: '#61AF9B',
     padding: 7,
     margin: 5,
-    borderRadius: 15,
+    borderRadius: 5,
     width: 140,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#0E6070',
     elevation: 5,
   },

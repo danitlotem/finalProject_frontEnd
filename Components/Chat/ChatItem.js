@@ -15,7 +15,10 @@ const ChatItem = () => {
       <Pressable style={styles.Pressables}>
         <Avatar.Icon size={35} style={{backgroundColor: '#0E6070'}} />
       </Pressable>
-      <View style={{flexDirection: 'row'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+        }}>
         <View style={styles.Details}>
           <Text style={styles.title}>Friend Name</Text>
           <Text style={styles.body}>last message</Text>

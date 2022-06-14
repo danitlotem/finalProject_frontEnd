@@ -13,7 +13,12 @@ const CustomSidebarMenu = props => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{alignSelf: 'center', top: 50, marginBottom: 80}}>
+      <View
+        style={{
+          alignSelf: 'center',
+          top: 50,
+          marginBottom: 80,
+        }}>
         {Object.keys(userConfig).length !== 0 && (
           <View>
             <Pressable onPress={() => navigation.navigate('My Profile')}>

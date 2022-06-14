@@ -5,8 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../Styles/NotificationStyle';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+import UpperBar from '../Components/UpperBar';
 
-const Notifications = () => {
+const Notifications = ({navigation}) => {
   const userConfig = useSelector(state => state.userConfig);
   const [notifications, setNotifications] = useState([]);
   const showNotifications = async userNum => {
@@ -25,7 +26,8 @@ const Notifications = () => {
   }, []);
 
   return (
-    <View style={{backgroundColor: 'white', height: '100%'}}>
+    <View style={styles.container}>
+      <UpperBar title={'Notifications'} />
       <View style={{width: '100%', alignSelf: 'center'}}>
         <Pressable style={styles.clearAllBtn}>
           <Ionicons name="trash-outline" size={25} color={'white'} />

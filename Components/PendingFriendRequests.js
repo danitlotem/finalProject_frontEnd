@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image, Pressable, Modal} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {View, Text, Pressable} from 'react-native';
+import {useSelector} from 'react-redux';
 import axios from 'axios';
 import UserItem from '../Components/userItem';
 

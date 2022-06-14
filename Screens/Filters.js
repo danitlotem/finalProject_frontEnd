@@ -15,6 +15,7 @@ import FilterItem from '../Components/Filters/FilterItem';
 import {Switch} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 const FiltersBarDrawer = createDrawerNavigator();
 
 const CustomFiltersBar = props => {
@@ -129,56 +130,69 @@ const CustomFiltersBar = props => {
             width: 100,
             alignSelf: 'center',
           }}>
-          <DrawerItem
-            label="Apply"
+          <Pressable
+            onPress={() => onApply()}
             style={{
-              backgroundColor: '#0E6070',
+              backgroundColor: '#286F6D',
+              justifyContent: 'center',
               alignSelf: 'center',
               width: 150,
               elevation: 5,
-            }}
-            labelStyle={{
-              color: '#ffff',
-              alignSelf: 'center',
-              left: -15,
-              fontSize: 16,
-            }}
-            icon={() => (
-              <Ionicons
-                color={'white'}
-                size={25}
-                style={{marginTop: -10, marginBottom: -10}}
-                name={'search-circle-outline'}
-              />
-            )}
-            onPress={() => onApply()}
-          />
-          <DrawerItem
-            label="Clear"
-            icon={() => (
-              <Ionicons
-                size={18}
-                style={{marginTop: -10, marginBottom: -10}}
-                name={'trash-outline'}
-              />
-            )}
+              borderRadius: 5,
+              height: 50,
+            }}>
+            <Ionicons
+              color={'#FFFFFF'}
+              size={25}
+              style={{
+                left: 10,
+                position: 'absolute',
+                justifyContent: 'center',
+              }}
+              name={'search-circle-outline'}
+            />
+            <Text
+              style={{
+                color: '#FFFFFF',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                fontSize: 16,
+              }}>
+              Apply
+            </Text>
+          </Pressable>
+
+          <Pressable
+            onPress={() => onClear()}
             style={{
               backgroundColor: '#ffff',
+              justifyContent: 'center',
               alignSelf: 'center',
               width: 150,
+              marginTop: 10,
               elevation: 5,
-              height: 30,
-            }}
-            labelStyle={{
-              color: '#0E6070',
-              alignSelf: 'center',
-              marginTop: -10,
-              marginBottom: -10,
-              left: -15,
-              fontSize: 16,
-            }}
-            onPress={() => onClear()}
-          />
+              borderRadius: 5,
+              height: 40,
+            }}>
+            <Ionicons
+              style={{
+                left: 10,
+                position: 'absolute',
+                justifyContent: 'center',
+              }}
+              size={18}
+              name={'trash-outline'}
+            />
+            <Text
+              style={{
+                color: '#0E6070',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                fontSize: 16,
+              }}>
+              Clear
+            </Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>

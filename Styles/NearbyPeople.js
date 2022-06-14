@@ -1,20 +1,12 @@
 import {StyleSheet} from 'react-native';
-
+import Theme from './Theme';
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#B3D8DF',
-    padding: 15,
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
+    height: Theme.height,
+    width: Theme.width,
+    backgroundColor: Theme.background,
   },
-  title: {
-    alignSelf: 'center',
-    top: 40,
-    color: '#0E6070',
-    fontSize: 36,
-    position: 'absolute',
-  },
+
   filterIconSection: {
     backgroundColor: '#0E6070',
     height: 30,

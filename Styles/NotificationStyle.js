@@ -1,6 +1,12 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
 
 const styles = StyleSheet.create({
+  container: {
+    height: Theme.height,
+    width: Theme.width,
+    backgroundColor: Theme.background,
+  },
   clearAllBtn: {
     width: 130,
     height: 40,

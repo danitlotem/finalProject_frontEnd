@@ -106,15 +106,16 @@ const UserItem = props => {
 
 const styles = StyleSheet.create({
   UserItem: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     flexDirection: 'row',
+    width: '95%',
     alignItems: 'center',
+    alignSelf: 'center',
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
-    borderColor: 'white',
-    elevation: 10,
-    borderWidth: 1.5,
+    // borderColor: '#614051',
+    // borderWidth: 1,
   },
   Picture: {
     width: 40,
@@ -126,13 +127,14 @@ const styles = StyleSheet.create({
   },
   friendName: {
     fontSize: 22,
+    color: '#122b1b',
     fontWeight: 'bold',
     alignItems: 'flex-start',
   },
   friendAge: {
     fontSize: 18,
     alignItems: 'flex-start',
-    color: '#0E6070',
+    color: '#122b1b',
     fontWeight: 'bold',
   },
 });

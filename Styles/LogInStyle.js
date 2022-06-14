@@ -1,27 +1,24 @@
 import {StyleSheet} from 'react-native';
+import Theme from './Theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffff',
-    height: '100%',
-    //top: 80,
+    backgroundColor: Theme.background,
+    height: Theme.height,
+    width: Theme.width,
   },
   titleText: {
-    color: '#0E6070',
+    color: '#FFFFFF',
     fontSize: 36,
   },
-  title: {
-    alignItems: 'center',
-  },
+
   LogInForm: {
-    position: 'absolute',
-    top: 80,
+    marginTop: 80,
     alignSelf: 'center',
     width: '80%',
   },
   buttonSection: {
-    position: 'absolute',
-    top: 330,
+    marginTop: 330,
     width: 250,
     height: 70,
     alignSelf: 'center',
@@ -30,11 +27,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   button: {
-    position: 'absolute',
+    backgroundColor: '#005252',
+    justifyContent: 'center',
+    alignSelf: 'center',
     zIndex: 0,
-    width: 200,
-    margin: 50,
-    marginBottom: 20,
+    width: 220,
+    height: 30,
   },
   icon: {
     height: 15,
@@ -46,13 +44,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   FormItemText: {
-    color: '#13869D',
-    fontSize: 24,
+    color: '#ffffff',
+    fontSize: 34,
     alignSelf: 'center',
     marginBottom: 20,
+    //fontWeight: 'bold',
   },
   linkToRegister: {
-    top: 278,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -60,8 +58,10 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     alignSelf: 'center',
+    backgroundColor: 'white',
     marginBottom: 20,
     height: 50,
+    borderRadius: 5,
   },
   scroll: {
     top: 40,

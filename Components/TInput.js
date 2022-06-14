@@ -1,12 +1,17 @@
 import React from 'react';
-import {TextInput} from 'react-native-paper';
+import {TextInput} from 'react-native';
 import {View} from 'react-native';
 
 const TInput = props => {
   return (
     <View>
       <TextInput
-        style={props.style}
+        style={{
+          ...props.style,
+          fontSize: 18,
+          backgroundColor: '#FFFFFF',
+          borderRadius: 5,
+        }}
         value={props.value}
         editable={props.editable}
         placeholder={props.title}

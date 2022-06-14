@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, Button, Pressable, Modal} from 'react-native';
 import styles from '../Styles/SignUpStyle';
 import {launchImageLibrary} from 'react-native-image-picker'; // Migration from 2.x.x to 3.x.x => showImagePicker API is removed.
@@ -45,19 +45,19 @@ const SignUp2 = props => {
         type: 'UPDATE_MAIN_PICTURE',
         image: image1.base64,
       });
-      // if (image2 !== {}) {
-      //   //FIX ME - maybe image1 is not main image
-      //   const response2 = await axios.post(`${url}${conf.user_id}`, {
-      //     base64image: image2.base64,
-      //     main_image: '0',
-      //   });
-      // }
-      // if (image3 !== {}) {
-      //   const response3 = await axios.post(`${url}${conf.user_id}`, {
-      //     base64image: image3.base64,
-      //     main_image: '0',
-      //   });
-      // }
+      if (image2 !== {}) {
+        //FIX ME - maybe image1 is not main image
+        const response2 = await axios.post(`${url}${conf.user_id}`, {
+          base64image: image2.base64,
+          main_image: '0',
+        });
+      }
+      if (image3 !== {}) {
+        const response3 = await axios.post(`${url}${conf.user_id}`, {
+          base64image: image3.base64,
+          main_image: '0',
+        });
+      }
       alert('GOOD 3🥳');
       props.setVisible(false);
     } catch (error) {
