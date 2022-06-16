@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+// eslint-disable-next-line no-unused-vars
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -10,7 +12,7 @@ import {
 import DatePicker from 'react-native-datepicker';
 import {Chip, Avatar} from 'react-native-paper';
 import Hobbies from '../Components/Filters/Hobbies';
-import ImageCard from '../Components/imageCard';
+// import ImageCard from '../Components/imageCard';
 import TInput from '../Components/TInput';
 import styles from '../Styles/MyProfileStyle';
 import {useSelector} from 'react-redux';
@@ -19,21 +21,20 @@ import UpperBar from '../Components/UpperBar';
 
 //FIX ME ליצור אובייקט שישמש כסטייט זמני וכשלוחצים על כפתור הוא יחליף את הקונפיגורציה בסטייט ובשרת
 
-const MyProfile = ({navigation}) => {
+const MyProfile = () => {
   const [edit, setEdit] = useState(false);
-
   const [photos, setPhotos] = useState([]);
-  const state = useSelector(state => state);
+  const email = useSelector(state => state.email);
   const userConfig = useSelector(state => state.userConfig);
-  const hobbies = userConfig.hobbies;
+  // const hobbies = userConfig.hobbies;
   const url = 'http://192.168.1.141:3000/userPictures/';
   const rawText = useSelector(state => state.rawText.registration_form);
   const myhobbies = useSelector(state => state.myHobbies);
 
   const getPhotos = async () => {
     try {
-      const photos = await axios.get(`${url}${userConfig.user_id}`);
-      setPhotos(photos.data);
+      const res = await axios.get(`${url}${userConfig.user_id}`);
+      setPhotos(res.data);
     } catch (error) {
       alert(error);
     }
@@ -41,22 +42,28 @@ const MyProfile = ({navigation}) => {
 
   useEffect(() => {
     getPhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const chipStyle = (value, chip) => {
+    return {
+      margin: 2,
+      backgroundColor: value === chip ? '#0E6070' : '#EBEBEB',
+    };
+  };
+  const chipTextColor = (value, chip) => {
+    return {
+      color: value === chip ? '#FFFFFF' : '#0E6070',
+    };
+  };
   return (
     <SafeAreaView style={styles.container}>
       <UpperBar title={'My Profile'} />
       <ScrollView>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-          }}>
+        <View style={styles.photosContainer}>
           {photos.map(item => {
             return (
               <View key={photos.fileName}>
-                {/* FIX ME add pic modal - modal is ready to use */}
                 <Pressable>
                   <Avatar.Image
                     size={80}
@@ -80,17 +87,17 @@ const MyProfile = ({navigation}) => {
           </Pressable>
         </View>
         <View style={styles.emailPassword}>
-          <View style={{flexDirection: 'column'}}>
+          <View style={styles.column}>
             <TInput
               style={styles.textInput}
-              value={state.email}
+              value={email}
               title={'Email'}
               editable={edit}
             />
           </View>
         </View>
         <View style={styles.fullName}>
-          <View style={{flexDirection: 'column'}}>
+          <View style={styles.column}>
             <TInput
               style={styles.nameInput}
               value={userConfig.first_name}
@@ -98,7 +105,7 @@ const MyProfile = ({navigation}) => {
               editable={edit}
             />
           </View>
-          <View style={{flexDirection: 'column'}}>
+          <View style={styles.column}>
             <TInput
               style={styles.nameInput}
               value={userConfig.last_name}
@@ -125,27 +132,15 @@ const MyProfile = ({navigation}) => {
           value={userConfig.profession}
           editable={edit}
         />
-        <View style={{marginTop: 20}}>
-          <Text style={{left: 40, marginBottom: 10, color: '#0E6070'}}>
-            I identify as
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-            }}>
+        <View>
+          <Text style={styles.catagoryText}>I identify as</Text>
+          <View style={styles.chipsBlocks}>
             {rawText.gender.map(item => {
               return (
                 <Chip
                   key={item}
-                  style={{
-                    backgroundColor:
-                      userConfig.gender === `${item}` ? '#0E6070' : '#EBEBEB',
-                  }}
-                  textStyle={{
-                    color:
-                      userConfig.gender === `${item}` ? 'white' : '#0E6070',
-                  }}>
+                  style={chipStyle(userConfig.gender, item)}
+                  textStyle={chipTextColor(userConfig.gender, item)}>
                   {item}
                 </Chip>
               );
@@ -153,28 +148,17 @@ const MyProfile = ({navigation}) => {
           </View>
         </View>
         <View>
-          <Text style={{left: 40, color: '#0E6070', marginTop: 20}}>
-            I prefer to be called
-          </Text>
+          <Text style={styles.catagoryText}>I prefer to be called</Text>
           <View style={styles.chipsBlocks}>
             {rawText.sexual_orientation.map(item => {
               return (
                 <Chip
                   key={item}
-                  style={{
-                    margin: 2,
-
-                    backgroundColor:
-                      userConfig.sexual_orientation === `${item}`
-                        ? '#0E6070'
-                        : '#EBEBEB',
-                  }}
-                  textStyle={{
-                    color:
-                      userConfig.sexual_orientation === `${item}`
-                        ? 'white'
-                        : '#0E6070',
-                  }}>
+                  style={chipStyle(userConfig.sexual_orientation, item)}
+                  textStyle={chipTextColor(
+                    userConfig.sexual_orientation,
+                    item,
+                  )}>
                   {item}
                 </Chip>
               );
@@ -182,86 +166,55 @@ const MyProfile = ({navigation}) => {
           </View>
         </View>
         <View>
-          {/* FIX ME - pronoun */}
-          <Text style={{left: 40, color: '#0E6070', marginTop: 20}}>
-            pronoun
-          </Text>
+          <Text style={styles.catagoryText}>pronoun</Text>
           <View style={styles.chipsBlocks}>
             {rawText.pronoun.map(item => {
               return (
                 <Chip
                   key={item}
-                  style={{
-                    margin: 2,
-                    backgroundColor:
-                      userConfig.pronoun === `${item}` ? '#0E6070' : '#EBEBEB',
-                  }}
-                  textStyle={{
-                    color:
-                      userConfig.pronoun === `${item}` ? 'white' : '#0E6070',
-                  }}>
+                  style={chipStyle(userConfig.pronoun, item)}
+                  textStyle={chipTextColor(userConfig.pronoun, item)}>
                   {item}
                 </Chip>
               );
             })}
           </View>
         </View>
-        <View style={{top: 10}}>
-          <Text style={{left: 40, color: '#0E6070'}}>
-            My relationship status
-          </Text>
-          <View style={styles.chipsBlocks}>
-            {rawText.relationship_status.map(item => {
-              return (
-                <Chip
-                  key={item}
-                  style={{
-                    margin: 2,
-                    backgroundColor:
-                      userConfig.relationship_status === `${item}`
-                        ? '#0E6070'
-                        : '#EBEBEB',
-                  }}
-                  textStyle={{
-                    color:
-                      userConfig.relationship_status === `${item}`
-                        ? 'white'
-                        : '#0E6070',
-                  }}>
-                  {item}
-                </Chip>
-              );
-            })}
-          </View>
+        <Text style={styles.catagoryText}>My relationship status</Text>
+        <View style={styles.chipsBlocks}>
+          {rawText.relationship_status.map(item => {
+            return (
+              <Chip
+                key={item}
+                style={chipStyle(userConfig.relationship_status, item)}
+                textStyle={chipTextColor(userConfig.relationship_status, item)}>
+                {item}
+              </Chip>
+            );
+          })}
         </View>
         <View style={styles.birthday}>
           <Text>birthday🎈🎉✨</Text>
           <DatePicker
-            style={{
-              width: '80%',
-              marginTop: 10,
-            }}
-            date={state.userConfig.date_of_birth}
+            style={styles.datePicker}
+            date={userConfig.date_of_birth}
             mode={'date'}
             placeholder="enter your birthday🎈🎉✨"
             format="DD-MM-YYYY"
-            maxDate={state.userConfig.date_of_birth}
+            maxDate={userConfig.date_of_birth}
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={{
               dateIcon: styles.dateIcon,
               dateInput: styles.dateInput,
             }}
-            onDateChange={date => {
-              setBirthday(date);
-            }}
+            // onDateChange={date => {
+            //   setBirthday(date);
+            // }}
           />
         </View>
-
-        <View style={styles.Hobbies}>
-          <Text style={{left: 35, color: '#0E6070', alignSelf: 'flex-start'}}>
-            My hobbies are:
-          </Text>
+        <View style={styles.hobbies}>
+          <Text style={styles.hobbiesText}>My hobbies are:</Text>
           <Hobbies
             style={styles.Pressables}
             text={

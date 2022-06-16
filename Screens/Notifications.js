@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+// eslint-disable-next-line no-unused-vars
 import React, {useState, useEffect} from 'react';
 import {View, Pressable, Text} from 'react-native';
 import NotificationItem from '../Components/NotificationItem';
@@ -7,7 +9,7 @@ import axios from 'axios';
 import {useSelector} from 'react-redux';
 import UpperBar from '../Components/UpperBar';
 
-const Notifications = ({navigation}) => {
+const Notifications = () => {
   const userConfig = useSelector(state => state.userConfig);
   const [notifications, setNotifications] = useState([]);
   const showNotifications = async userNum => {
@@ -23,20 +25,19 @@ const Notifications = ({navigation}) => {
 
   useEffect(() => {
     showNotifications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={styles.container}>
       <UpperBar title={'Notifications'} />
-      <View style={{width: '100%', alignSelf: 'center'}}>
-        <Pressable style={styles.clearAllBtn}>
-          <Ionicons name="trash-outline" size={25} color={'white'} />
-          <Text style={styles.textClearBtn}>Clear All</Text>
-        </Pressable>
-      </View>
-      <View style={{alignItems: 'center'}}>
-        {notifications.map(item => {
-          return <NotificationItem details={item} />;
+      <Pressable style={styles.clearAllBtn}>
+        <Ionicons name="trash-outline" size={25} color={'white'} />
+        <Text style={styles.textClearBtn}>Clear All</Text>
+      </Pressable>
+      <View style={styles.itemsContainer}>
+        {notifications.map((item, index) => {
+          return <NotificationItem key={index} details={item} />;
         })}
       </View>
     </View>

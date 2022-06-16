@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, Image, Text} from 'react-native';
-import {
-  DrawerItemList,
-  createDrawerNavigator,
-  DrawerItem,
-} from '@react-navigation/drawer';
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import {useState} from 'react';
+import {View, SafeAreaView, Text} from 'react-native';
+import {DrawerItemList, createDrawerNavigator} from '@react-navigation/drawer';
 import NearbyPeople from '../Screens/NearbyPeople';
 import AgeItem from '../Components/Filters/AgeItem';
 import SearchMode from '../Components/Filters/SearchMode';
@@ -21,9 +19,9 @@ const FiltersBarDrawer = createDrawerNavigator();
 const CustomFiltersBar = props => {
   const myAge = useSelector(state => state.userConfig.age);
   const options = useSelector(state => state.rawText);
-  const filters = useSelector(state => state.filters);
+  //const filters = useSelector(state => state.filters);
 
-  const [age, setAge] = useState([]);
+  //const [age, setAge] = useState([]);
   const [gender, setGender] = useState(options.filters.Gender[0]);
   const [interestedIn, setInterestedIn] = useState(
     options.filters.Interested_in[0],
@@ -31,7 +29,7 @@ const CustomFiltersBar = props => {
   const [relationship, setRelationship] = useState(
     options.registration_form.relationship_status[0],
   );
-  const [radius, setRadius] = useState('Did not choose yet');
+  //const [radius, setRadius] = useState('Did not choose yet');
   const [searchMode, setSearchMode] = useState(options.filters.Search_Mode[0]);
   const [isSwitchOn, setIsSwitchOn] = useState(0);
 
@@ -52,6 +50,7 @@ const CustomFiltersBar = props => {
         friends_only_filter: isSwitchOn,
       },
     });
+    // eslint-disable-next-line react/prop-types
     props.navigation.closeDrawer();
   };
   const onClear = () => {
@@ -69,16 +68,14 @@ const CustomFiltersBar = props => {
     });
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{alignItems: 'center', top: 20}}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerBlock}>
         <Ionicons name="search-circle-outline" size={40} color={'#1B8AA0'} />
-        <Text style={{color: '#1B8AA0', fontSize: 18, fontWeight: 'bold'}}>
-          Find New Friends
-        </Text>
+        <Text style={styles.findNewFriendsText}>Find New Friends</Text>
       </View>
       <DrawerItemList {...props} />
-      <View style={{top: 30, alignSelf: 'center'}}>
-        <AgeItem myAge={myAge} setAge={setAge} />
+      <View style={styles.filtersMenu}>
+        <AgeItem myAge={myAge} /*setAge={setAge}*/ />
         <FilterItem
           title={gender}
           arr={options.filters.Gender}
@@ -97,101 +94,39 @@ const CustomFiltersBar = props => {
           function={setRelationship}
           value={relationship}
         />
-        <Hobbies style={styles.viewStyle} list={hobbies} text={'Hobbies'} />
-        <Radius setRadius={setRadius} />
+        <Hobbies style={styles.viewStyle} list={hobbies} title={'Hobbies'} />
+        <Radius /*setRadius={setRadius}*/ />
         <SearchMode
           value={searchMode}
           title={searchMode}
           setSearchMode={setSearchMode}
         />
-        <View
-          style={{
-            alignSelf: 'flex-start',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            top: 10,
-          }}>
+        <View style={styles.freindsOnlyBlock}>
           <Switch
             value={isSwitchOn}
             onValueChange={onToggleSwitch}
             color={'#0E6070'}
           />
-          <Text
-            style={{
-              alignSelf: 'center',
-              justifyContent: 'center',
-            }}>
-            Friends Only
-          </Text>
+          <Text style={styles.friendsOnlyText}>Friends Only</Text>
         </View>
-        <View
-          style={{
-            top: 20,
-            width: 100,
-            alignSelf: 'center',
-          }}>
-          <Pressable
-            onPress={() => onApply()}
-            style={{
-              backgroundColor: '#286F6D',
-              justifyContent: 'center',
-              alignSelf: 'center',
-              width: 150,
-              elevation: 5,
-              borderRadius: 5,
-              height: 50,
-            }}>
+        <View style={styles.applyBlock}>
+          <Pressable onPress={() => onApply()} style={styles.searchPressable}>
             <Ionicons
               color={'#FFFFFF'}
               size={25}
-              style={{
-                left: 10,
-                position: 'absolute',
-                justifyContent: 'center',
-              }}
+              style={styles.searchIcon}
               name={'search-circle-outline'}
             />
-            <Text
-              style={{
-                color: '#FFFFFF',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                fontSize: 16,
-              }}>
-              Apply
-            </Text>
+            <Text style={styles.applyText}>Apply</Text>
           </Pressable>
 
-          <Pressable
-            onPress={() => onClear()}
-            style={{
-              backgroundColor: '#ffff',
-              justifyContent: 'center',
-              alignSelf: 'center',
-              width: 150,
-              marginTop: 10,
-              elevation: 5,
-              borderRadius: 5,
-              height: 40,
-            }}>
+          <Pressable onPress={() => onClear()} style={styles.trashPressables}>
             <Ionicons
-              style={{
-                left: 10,
-                position: 'absolute',
-                justifyContent: 'center',
-              }}
+              style={styles.trashIcon}
               size={18}
               name={'trash-outline'}
             />
-            <Text
-              style={{
-                color: '#0E6070',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                fontSize: 16,
-              }}>
-              Clear
-            </Text>
+            <Text style={styles.clearText}>Clear</Text>
           </Pressable>
         </View>
       </View>

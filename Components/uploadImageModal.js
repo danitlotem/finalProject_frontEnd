@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
 import React, {useState} from 'react';
 import {View, Text, Image, Button, Pressable, Modal} from 'react-native';
 import styles from '../Styles/SignUpStyle';
@@ -5,7 +7,7 @@ import {launchImageLibrary} from 'react-native-image-picker'; // Migration from 
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 
-const SignUp2 = props => {
+const UplaodImageModal = props => {
   const [image1, setImage1] = useState({});
   const [image2, setImage2] = useState({});
   const [image3, setImage3] = useState({});
@@ -35,8 +37,8 @@ const SignUp2 = props => {
 
   const uploadImage = async event => {
     try {
-      if (image1 != {}) {
-        const response1 = await axios.post(`${url}${conf.user_id}`, {
+      if (image1 !== {}) {
+        await axios.post(`${url}${conf.user_id}`, {
           base64image: image1.base64,
           main_image: '1',
         });
@@ -47,18 +49,17 @@ const SignUp2 = props => {
       });
       if (image2 !== {}) {
         //FIX ME - maybe image1 is not main image
-        const response2 = await axios.post(`${url}${conf.user_id}`, {
+        await axios.post(`${url}${conf.user_id}`, {
           base64image: image2.base64,
           main_image: '0',
         });
       }
       if (image3 !== {}) {
-        const response3 = await axios.post(`${url}${conf.user_id}`, {
+        await axios.post(`${url}${conf.user_id}`, {
           base64image: image3.base64,
           main_image: '0',
         });
       }
-      alert('GOOD 3🥳');
       props.setVisible(false);
     } catch (error) {
       console.error(error);
@@ -66,21 +67,13 @@ const SignUp2 = props => {
   };
   return (
     <Modal transparent={true} visible={props.visible}>
-      <View
-        style={{
-          padding: 20,
-          elevation: 10,
-          backgroundColor: '#ffff',
-          height: '80%',
-          width: '80%',
-          marginTop: 80,
-          marginLeft: 40,
-        }}>
+      <View style={styles.modalContainer}>
         <View>
           <View>
             <Pressable onPress={() => props.setVisible(!props.visible)}>
-              <Text style={{fontSize: 18}}>X</Text>
+              <Text style={styles.Xbutton}>X</Text>
             </Pressable>
+            <Text style={styles.cameraIcon}>📷</Text>
             <Text style={styles.title}>Add some pictures</Text>
             <Text style={styles.subText}>You must add at least 1 picture</Text>
             <Text style={styles.subText}>upload only JPEG/ JPG/ PNG</Text>
@@ -124,7 +117,7 @@ const SignUp2 = props => {
                 style={styles.picView}
               />
             </Pressable>
-            <View style={{marginTop: 30}}>
+            <View>
               <Button
                 color="#0E6070"
                 title="Upload"
@@ -138,4 +131,4 @@ const SignUp2 = props => {
   );
 };
 
-export default SignUp2;
+export default UplaodImageModal;

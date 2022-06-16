@@ -1,14 +1,16 @@
+// eslint-disable-next-line no-unused-vars
 import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, SafeAreaView, Image} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {List} from 'react-native-paper';
-import SignUp2 from './SignUp2';
+import UplaodImageModal from '../Components/uploadImageModal';
 import styles from '../Styles/HomeStyle';
 import axios from 'axios';
 import UpperBar from '../Components/UpperBar';
 
-const Home = ({navigation}) => {
+const Home = () => {
   const [expanded, setExpanded] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [photos, setPhotos] = useState([]);
   const url = 'http://192.168.1.141:3000/userPictures/main/';
   const userConfig = useSelector(state => state.userConfig);
@@ -27,6 +29,7 @@ const Home = ({navigation}) => {
         setVisible(true); //BUG async commands
       }
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert(error);
     }
   };
@@ -43,7 +46,7 @@ const Home = ({navigation}) => {
   const items = searchModeOptions.map((item, index) => {
     return (
       <List.Item
-        style={{padding: 2}}
+        style={styles.searchModeItems}
         title={item}
         key={index}
         onPress={() => changeMode(item)}
@@ -54,12 +57,13 @@ const Home = ({navigation}) => {
   useEffect(() => {
     setVisible(false);
     getPhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={styles.container}>
       <View>
-        <SignUp2 visible={visible} setVisible={setVisible} />
+        <UplaodImageModal visible={visible} setVisible={setVisible} />
       </View>
       <UpperBar title={'Home'} />
       <View style={styles.innterContainer}>
@@ -80,7 +84,7 @@ const Home = ({navigation}) => {
         <SafeAreaView style={styles.searchModeList}>
           <List.Accordion
             title={searchMode}
-            style={{height: 40, padding: 2}}
+            style={styles.selectedSearchMode}
             expanded={expanded}
             onPress={() => setExpanded(!expanded)}>
             {items}

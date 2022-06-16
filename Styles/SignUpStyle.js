@@ -10,15 +10,6 @@ const styles = StyleSheet.create({
   emailPassword: {
     width: '100%',
   },
-  chipBlock: {
-    top: 10,
-    left: 40,
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '80%',
-    height: 80,
-  },
 
   picView: {
     width: 80,
@@ -42,16 +33,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    flexDirection: 'row',
-  },
-  title: {
-    color: '#0E6070',
-    fontSize: 36,
-    alignSelf: 'center',
   },
   textTitle: {
     marginTop: 15,
-    left: 40,
     marginBottom: 10,
     color: '#0E6070',
   },
@@ -69,25 +53,20 @@ const styles = StyleSheet.create({
     width: 150,
   },
   birthday: {
-    padding: 7,
-    flexDirection: 'column',
-    alignItems: 'center',
-
-    width: '100%',
+    marginTop: 20,
   },
   Pressables: {
     height: 30,
-    width: '75%',
+    width: '80%',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#EBEBEB',
+    left: 40,
   },
   Hobbies: {
-    padding: 7,
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: 50,
+    marginTop: 20,
+    marginBottom: 20,
   },
   ButtonSection1: {
     width: 250,
@@ -101,8 +80,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     alignSelf: 'center',
-    marginTop: 25,
     color: '#ffffff',
+    marginTop: -10,
   },
   pic: {
     height: 80,
@@ -119,8 +98,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ButtonSection2: {
-    position: 'absolute',
-    top: 550,
     width: 150,
     height: 70,
     alignSelf: 'center',
@@ -136,6 +113,49 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  column: {
+    flexDirection: 'column',
+  },
+  catagoryText: {
+    left: 40,
+    color: '#0E6070',
+  },
+  invalidText: {
+    left: 30,
+    color: 'red',
+  },
+
+  chipBlock: {
+    top: 10,
+    left: 40,
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '80%',
+  },
+  catagory: {
+    marginTop: 20,
+  },
+  dateText: {
+    color: '#0E6070',
+  },
+  Xbutton: {
+    fontSize: 18,
+  },
+  modalContainer: {
+    padding: 20,
+    elevation: 10,
+    backgroundColor: '#ffff',
+    height: '80%',
+    width: '80%',
+    marginTop: 80,
+    marginLeft: 40,
+  },
+  cameraIcon: {
+    alignSelf: 'center',
+    fontSize: 40,
+    marginTop: -10,
   },
 });
 

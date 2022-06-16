@@ -4,7 +4,6 @@ import {
   Text,
   Modal,
   Button,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
   Pressable,
@@ -12,6 +11,8 @@ import {
 import {Divider} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import styles from '../../Styles/FiltersStyle';
+import {shouldRasterizeIOS} from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 
 const Hobbies = props => {
   const listOfHobbies = useSelector(state => state.rawText.Hobbies);
@@ -21,6 +22,14 @@ const Hobbies = props => {
   const hideModal = () => setVisible(false);
   const dispatch = useDispatch();
 
+  const hobbiesListItemStyle = item => {
+    return {
+      backgroundColor: myHobbies.includes(item) ? '#81BEC9' : 'transparent',
+      borderRadius: 3,
+      padding: 2,
+    };
+  };
+
   const addToList = val => {
     dispatch({
       type: 'UPDATE_MY_HOBBIES',
@@ -28,9 +37,9 @@ const Hobbies = props => {
     });
   };
   return (
-    <View style={props.style}>
+    <View style={styles.viewStyle}>
       <Modal transparent={true} visible={visible}>
-        <View style={styles.modal}>
+        <View style={styles.Item}>
           <View style={{top: 20, alignSelf: 'center', position: 'absolute'}}>
             <Text style={{fontSize: 18}}>Hobbies</Text>
           </View>
@@ -38,7 +47,7 @@ const Hobbies = props => {
             {[...listOfHobbies].slice(1).map((element, elmIndx) => {
               return (
                 <View key={elmIndx}>
-                  <Text style={{fontWeight: 'bold', marginTop: 10}}>
+                  <Text style={styles.hobbiesCatagoryTitleList}>
                     {element.type}
                   </Text>
 
@@ -46,13 +55,7 @@ const Hobbies = props => {
                     return (
                       <TouchableOpacity
                         //FIX ME reRender on press
-                        style={{
-                          backgroundColor: myHobbies.includes(item)
-                            ? '#81BEC9'
-                            : 'transparent',
-                          borderRadius: 3,
-                          padding: 2,
-                        }}
+                        style={hobbiesListItemStyle(item)}
                         key={index}
                         onPress={() => addToList(item)}>
                         <Text>{item}</Text>
@@ -69,43 +72,40 @@ const Hobbies = props => {
           </View>
         </View>
       </Modal>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Pressable style={{alignSelf: 'center'}} onPress={showModal}>
-          <Text style={{color: '#286f6d', fontSize: 16}}>{props.text}</Text>
+
+      {/* filter item */}
+      <View style={styles.item}>
+        <Pressable style={styles.center} onPress={showModal}>
+          <Text style={styles.valueItemText}>{props.title}</Text>
         </Pressable>
-        <View style={{}}>
+        <Pressable style={styles.center}>
           <Ionicons
-            color={'red'}
-            size={22}
+            color={'#1B8AA0'}
+            size={18}
+            style={styles.trashIcon}
             name={'trash-outline'}
-            onPress={() => {
-              dispatch({
-                type: 'UPDATE_MY_HOBBIES',
-                myHobbies: [],
-              });
-            }}
           />
-        </View>
+        </Pressable>
       </View>
     </View>
   );
 };
-const styles = StyleSheet.create({
-  modal: {
-    padding: 20,
-    elevation: 10,
-    backgroundColor: '#ffff',
-    height: '80%',
-    width: '80%',
-    marginTop: 80,
-    marginLeft: 40,
-  },
-  scrollView: {
-    top: 20,
-    alignSelf: 'center',
-    height: 100,
-    width: '100%',
-    marginVertical: 30,
-  },
-});
+// const styles = StyleSheet.create({
+//   modal: {
+//     padding: 20,
+//     elevation: 10,
+//     backgroundColor: '#ffff',
+//     height: '80%',
+//     width: '80%',
+//     marginTop: 80,
+//     marginLeft: 40,
+//   },
+//   scrollView: {
+//     top: 20,
+//     alignSelf: 'center',
+//     height: 100,
+//     width: '100%',
+//     marginVertical: 30,
+//   },
+// });
 export default Hobbies;

@@ -1,7 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
+// eslint-disable-next-line no-unused-vars
 import React, {useState} from 'react';
-import {View, Text, Modal, Button, Pressable, StyleSheet} from 'react-native';
+import {View, Text, Modal, Button, Pressable} from 'react-native';
 import RnVerticalSlider from 'rn-vertical-slider';
-//import styles from '../../Styles/FiltersStyle';
+import styles from '../../Styles/FiltersStyle';
 
 const Radius = props => {
   const [visible, setVisible] = useState(false);
@@ -12,26 +14,9 @@ const Radius = props => {
   return (
     <View style={styles.viewStyle}>
       <Modal transparent={true} visible={visible}>
-        <View
-          style={{
-            padding: 20,
-            elevation: 10,
-            backgroundColor: '#ffff',
-            height: '80%',
-            width: '80%',
-            marginTop: 80,
-            marginLeft: 40,
-          }}>
-          <View style={{top: 50, alignSelf: 'center', position: 'absolute'}}>
-            <Text style={{fontSize: 18}}>Radius</Text>
-          </View>
-          <View
-            style={{
-              top: 50,
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+        <View style={styles.Item}>
+          <Text style={{...styles.title, marginBottom: 20}}>Radius</Text>
+          <View style={styles.radiusSliderContainer}>
             <RnVerticalSlider
               value={radiusVal}
               disabled={false}
@@ -61,17 +46,5 @@ const Radius = props => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  viewStyle: {
-    backgroundColor: '#61AF9B',
-    padding: 7,
-    margin: 5,
-    borderRadius: 5,
-    width: 140,
-    borderWidth: 1,
-    borderColor: '#0E6070',
-    elevation: 5,
-  },
-});
 
 export default Radius;

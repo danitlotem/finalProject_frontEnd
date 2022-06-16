@@ -1,5 +1,6 @@
-import styles from '../Styles/ChatStyle';
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
+import styles from '../Styles/ChatStyle';
 import {View} from 'react-native';
 import MessageForm from '../Components/Chat/MessageForm';
 import MyMessage from '../Components/Chat/MyMessage';
@@ -12,14 +13,12 @@ const Conversation = () => {
     <View>
       <View style={styles.chatFeed}>
         {messagesState.map((item, index) => (
-          <View key={`msg_${index}`} style={{width: '100%'}}>
-            <View style={styles.messageBlock}>
-              {index % 2 ? (
-                <MyMessage message={item} />
-              ) : (
-                <TheirMessage message={item} />
-              )}
-            </View>
+          <View key={`msg_${index}`} style={styles.messageBlock}>
+            {index % 2 ? (
+              <MyMessage message={item} />
+            ) : (
+              <TheirMessage message={item} />
+            )}
           </View>
         ))}
       </View>

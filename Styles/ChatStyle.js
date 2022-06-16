@@ -1,10 +1,13 @@
 import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
+  manageChatsContainer: {
+    backgroundColor: '#61AF9B',
+    height: '100%',
+  },
   chatFeed: {
     height: '100%',
     width: '100%',
     overflow: 'scroll',
-    // backgroundColor: rgb(240, 240, 240),
   },
   chatTitle: {
     textAlign: 'center',
@@ -23,15 +26,12 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 18,
     bottom: 60,
-    // backgroundColor: rgb(240, 240, 240),
     top: 500,
     height: 50,
-    position: 'absolute',
   },
   messageForm: {
     width: '95%',
     borderRadius: 6,
-    // backgroundColor: rgb(118, 113, 113),
     position: 'absolute',
   },
   thierMessage: {
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     backgroundColor: 'white',
-    // border: 1px solid white;
     fontSize: 15,
   },
   sendIcon: {
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
   },
   messageBlock: {
     width: '100%',
-    //display: 'inline-block',
   },
   item: {
     backgroundColor: '#B0D0D9',

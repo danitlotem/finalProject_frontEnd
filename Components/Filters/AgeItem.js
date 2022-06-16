@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Modal, Button, Pressable, StyleSheet} from 'react-native';
+// eslint-disable-next-line no-unused-vars
+import React, {useState} from 'react';
+import {View, Text, Modal, Button, Pressable} from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-//import styles from '../../Styles/FiltersStyle';
-import {useDispatch, useSelector} from 'react-redux';
+import styles from '../../Styles/FiltersStyle';
+import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const AgeItem = props => {
@@ -10,63 +11,43 @@ const AgeItem = props => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const config = useSelector(state => state.userConfig);
-  const stateFilters = useSelector(state => state.filters);
-  const dispatch = useDispatch();
+  // const stateFilters = useSelector(state => state.filters);
+  // const dispatch = useDispatch();
   const [min, setMin] = useState(config.age - 5);
   const [max, setMax] = useState(config.age + 5);
 
   return (
     <View style={styles.viewStyle}>
+      {/* modal */}
       <Modal transparent={true} visible={visible}>
-        <View
-          style={{
-            padding: 20,
-            elevation: 10,
-            backgroundColor: '#ffff',
-            height: '80%',
-            width: '80%',
-            marginTop: 80,
-            marginLeft: 40,
-          }}>
-          <View style={{top: 50, alignSelf: 'center', position: 'absolute'}}>
-            <Text style={{fontSize: 22, color: '#1B8AA0', fontWeight: 'bold'}}>
-              Age
-            </Text>
-          </View>
-          <View style={{top: 150}}>
-            <View style={{alignSelf: 'center'}}>
-              <Text style={{fontSize: 18}}>{`${min}-${max}`}</Text>
-            </View>
-            <MultiSlider
-              sliderLength={250}
-              isMarkersSeparated={true}
-              min={18}
-              max={100}
-              values={[min, max]}
-              onValuesChangeFinish={values => {
-                setMax(values[1]), setMin(values[0]), props.setAge(values);
-              }}
-            />
-            <View style={{top: 50, width: 250, alignSelf: 'center'}}>
-              <Button title={'close'} onPress={hideModal} />
-            </View>
+        <View style={styles.Item}>
+          <Text style={styles.title}>Age</Text>
+          <Text style={styles.sliderValues}>{`${min}-${max}`}</Text>
+          <MultiSlider
+            sliderLength={250}
+            isMarkersSeparated={true}
+            min={18}
+            max={100}
+            values={[min, max]}
+            onValuesChangeFinish={values => {
+              setMax(values[1]), setMin(values[0]), props.setAge(values);
+            }}
+          />
+          <View style={styles.buttonContainer}>
+            <Button title={'close'} onPress={hideModal} />
           </View>
         </View>
       </Modal>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Pressable
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-          onPress={showModal}>
+
+      {/* filter item */}
+      <View style={styles.item}>
+        <Pressable style={styles.itemPressable} onPress={showModal}>
           {/* FIX ME -  stateFilters.age_filter !== [] only after apply*/}
-          <Text style={{color: '#FFFFFF', fontSize: 16}}>
+          <Text style={styles.valueItemText}>
             {min}-{max}
           </Text>
         </Pressable>
         <Pressable
-          style={{justifyContent: 'center'}}
           onPress={() => {
             setMax(config.age + 5),
               setMin(config.age - 5),
@@ -75,12 +56,7 @@ const AgeItem = props => {
           <Ionicons
             color={'#1B8AA0'}
             size={18}
-            style={{
-              marginTop: -10,
-              marginBottom: -10,
-              left: 30,
-              alignSelf: 'center',
-            }}
+            style={styles.trashIcon}
             name={'trash-outline'}
           />
         </Pressable>
@@ -88,17 +64,5 @@ const AgeItem = props => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  viewStyle: {
-    backgroundColor: '#61AF9B',
-    padding: 7,
-    margin: 5,
-    borderRadius: 5,
-    width: 140,
-    borderWidth: 1,
-    borderColor: '#0E6070',
-    elevation: 5,
-  },
-});
 
 export default AgeItem;

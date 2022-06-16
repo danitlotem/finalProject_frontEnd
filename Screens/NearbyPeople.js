@@ -1,3 +1,6 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React, {useCallback, useEffect} from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
 import UserItem from '../Components/userItem';
@@ -32,7 +35,7 @@ const NearbyPeople = ({navigation}) => {
     } catch (error) {
       alert(error.msg);
     }
-  }, [user_id, filters]);
+  }, [user_id, filters, dispatch]);
 
   useEffect(() => {
     onApplyHandler();
@@ -40,11 +43,10 @@ const NearbyPeople = ({navigation}) => {
 
   const onFriendRequest = async userNum => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `http://192.168.1.141:3000/friendRequest/send/${user_id}/${userNum}`,
       );
       onApplyHandler(); //FIX ME?
-      alert('GOOD🥳');
     } catch (error) {
       alert(error);
     }
@@ -53,21 +55,13 @@ const NearbyPeople = ({navigation}) => {
   return (
     <View style={styles.container}>
       <UpperBar title={'Nearby people'} />
-      <View
-        style={{
-          height: 50,
-          width: 150,
-          justifyContent: 'center',
-          alignSelf: 'center',
-        }}>
+      <View style={styles.openFiltersContainer}>
         <Pressable
           style={styles.filtersStyle}
           onPress={showFilters}
           onApply={onApplyHandler}>
           <Ionicons name={'filter-outline'} size={22} />
-          <Text style={{fontWeight: 'bold', fontSize: 16, left: 10}}>
-            Open Filters
-          </Text>
+          <Text style={styles.openFiltersText}>Open Filters</Text>
         </Pressable>
       </View>
 

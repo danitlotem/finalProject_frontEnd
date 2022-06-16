@@ -3,8 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import LogIn from '../Screens/LogIn';
-import SignUp1 from '../Screens/SignUp1';
-import SignUp2 from '../Screens/SignUp2';
+import SignUp from '../Screens/SignUp';
+import UplaodImageModal from '../Components/uploadImageModal';
 import Home from '../Screens/Home';
 import MyFriends from '../Screens/MyFriends';
 import MyProfile from '../Screens/MyProfile';
@@ -28,8 +28,8 @@ const ChatAndConversationsScreens = [
 ];
 const loggingToAppScreens = [
   {title: 'Log In stack', screen: LogIn},
-  {title: 'SignUp1', screen: SignUp1},
-  {title: 'SignUp2', screen: SignUp2},
+  {title: 'SignUp', screen: SignUp},
+  {title: 'UplaodImageModal', screen: UplaodImageModal},
   {title: 'HomeStack', screen: DrawerNavi},
 ];
 

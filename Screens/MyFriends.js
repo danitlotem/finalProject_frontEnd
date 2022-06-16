@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+// eslint-disable-next-line no-unused-vars
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -16,7 +18,7 @@ import PendingFriendRequests from '../Components/PendingFriendRequests';
 import MyFriendRequests from '../Components/MyFriendRequests';
 import UpperBar from '../Components/UpperBar';
 
-const MyFriends = ({navigation}) => {
+const MyFriends = () => {
   const dispatch = useDispatch();
   const myConnections = 'http://192.168.1.141:3000/connections///byName/';
   const userConfig = useSelector(state => state.userConfig);
@@ -33,7 +35,9 @@ const MyFriends = ({navigation}) => {
       const friends = await axios.get(
         `${myConnections}${userConfig.user_id}/1/${valToSearch}`,
       );
+      // eslint-disable-next-line no-prototype-builtins
       if (friends.data.hasOwnProperty('msg')) {
+        // eslint-disable-next-line no-alert
         alert(friends.data.msg); // there are no connections?
       } else {
         dispatch({
@@ -48,9 +52,11 @@ const MyFriends = ({navigation}) => {
 
   useEffect(() => {
     FindFriend();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     FindFriend();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [friendToSearch, visibleMyRequests, visiblePendingRequests]);
 
   return (
@@ -80,7 +86,7 @@ const MyFriends = ({navigation}) => {
           <Text style={styles.searchText}>Search</Text>
         </Pressable>
         <Pressable
-          style={{justifyContent: 'center'}}
+          style={styles.trashPressable}
           onPress={() => {
             dispatch({
               type: 'FRIEND_TO_SEARCH',
@@ -107,7 +113,7 @@ const MyFriends = ({navigation}) => {
           <Text style={styles.requestText}>Pending friend request</Text>
         </Pressable>
       </View>
-      <SafeAreaView style={{top: 20}}>
+      <SafeAreaView style={styles.listOfConfContainer}>
         {listOfConf.map(item => {
           return (
             <UserItem config={item} key={`${item.user_id}`} type={'friend'} />

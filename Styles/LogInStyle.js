@@ -34,6 +34,12 @@ const styles = StyleSheet.create({
     width: 220,
     height: 30,
   },
+  buttonText: {
+    alignSelf: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
   icon: {
     height: 15,
     width: 15,
@@ -48,7 +54,6 @@ const styles = StyleSheet.create({
     fontSize: 34,
     alignSelf: 'center',
     marginBottom: 20,
-    //fontWeight: 'bold',
   },
   linkToRegister: {
     alignItems: 'center',
@@ -67,6 +72,13 @@ const styles = StyleSheet.create({
     top: 40,
     height: 200,
     padding: 7,
+  },
+  createAnAcountText: {
+    color: '#005252',
+    fontWeight: 'bold',
+  },
+  dontHaveAUser: {
+    color: '#FFFFFF',
   },
 });
 

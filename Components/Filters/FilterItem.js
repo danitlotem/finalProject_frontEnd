@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
-import {View, StyleSheet, Modal, Pressable, Text, Button} from 'react-native';
-import {useSelector} from 'react-redux';
+import {View, Modal, Pressable, Text, Button} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import styles from '../../Styles/FiltersStyle';
 const FilterItem = props => {
   const arr = props.arr.slice(1);
   const [visible, setVisible] = useState(false);
@@ -12,21 +13,8 @@ const FilterItem = props => {
   return (
     <View style={styles.viewStyle}>
       <Modal transparent={true} visible={visible}>
-        <View
-          style={{
-            padding: 20,
-            elevation: 10,
-            backgroundColor: '#ffff',
-            height: '80%',
-            width: '80%',
-            marginTop: 80,
-            marginLeft: 40,
-            flexDirection: 'column',
-          }}>
-          <View
-            style={{
-              marginTop: 50,
-            }}>
+        <View style={styles.Item}>
+          <View style={{marginTop: 50}}>
             {arr.map(item => {
               return (
                 <Pressable
@@ -35,47 +23,28 @@ const FilterItem = props => {
                     props.function(item);
                     hideModal();
                   }}>
-                  <Text
-                    style={{
-                      color: item === props.value ? 'red' : '#1B8AA0',
-                      backgroundColor: '#ffff',
-                      elevation: 5,
-                      margin: 10,
-                      fontSize: 22,
-                      alignSelf: 'center',
-                    }}>
-                    {item}
-                  </Text>
+                  <Text style={styles.textItem}>{item}</Text>
                 </Pressable>
               );
             })}
           </View>
-          <View style={{top: 100}}>
+          <View style={styles.buttonContainer}>
             <Button title={'close'} onPress={hideModal} />
           </View>
         </View>
       </Modal>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Pressable
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-          onPress={showModal}>
-          <Text style={{color: '#FFFFFF', fontSize: 16}}>{props.title}</Text>
+
+      <View style={styles.item}>
+        <Pressable style={styles.itemPressable} onPress={showModal}>
+          <Text style={styles.valueItemText}>{props.title}</Text>
         </Pressable>
         <Pressable
-          style={{justifyContent: 'center'}}
+          style={styles.center}
           onPress={() => props.function(props.arr[0])}>
           <Ionicons
             color={'#1B8AA0'}
             size={18}
-            style={{
-              marginTop: -10,
-              marginBottom: -10,
-              left: 30,
-              alignSelf: 'center',
-            }}
+            style={styles.trashIcon}
             name={'trash-outline'}
           />
         </Pressable>
@@ -83,18 +52,5 @@ const FilterItem = props => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  viewStyle: {
-    backgroundColor: '#61AF9B',
-    padding: 7,
-    margin: 5,
-    borderRadius: 5,
-    width: 140,
-    borderWidth: 1,
-    borderColor: '#122B1B',
-    elevation: 10,
-  },
-});
 
 export default FilterItem;

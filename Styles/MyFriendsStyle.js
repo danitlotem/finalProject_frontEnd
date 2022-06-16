@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     height: 200,
     padding: 7,
   },
+  trashPressable: {
+    justifyContent: 'center',
+  },
   trashIcon: {
     backgroundColor: 'white',
     elevation: 10,
@@ -66,6 +69,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#ffffff',
     fontWeight: 'bold',
+  },
+  listOfConfContainer: {
+    top: 20,
   },
 });
 

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,14 +14,10 @@ const NotificationItem = props => {
           name="notifications-outline"
           size={35}
           color={'#0E6070'}
-          style={{
-            backgroundColor: '#65B0C6',
-            borderRadius: 18,
-            padding: 4,
-          }}
+          style={styles.iconItem}
         />
       </Pressable>
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.row}>
         <View style={styles.Details}>
           <Text style={styles.title}>{props.details.title}</Text>
           <Text style={styles.body}>{props.details.content}</Text>

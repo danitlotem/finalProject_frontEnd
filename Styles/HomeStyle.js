@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
     elevation: 10,
     width: '70%',
   },
+  selectedSearchMode: {
+    height: 40,
+    padding: 2,
+  },
+  searchModeItems: {
+    padding: 2,
+  },
   lottiStyle: {
     alignSelf: 'center',
     zIndex: 0,

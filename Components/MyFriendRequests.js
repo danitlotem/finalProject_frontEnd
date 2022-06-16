@@ -1,6 +1,10 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-alert */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image, Pressable, Modal} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 import axios from 'axios';
 import UserItem from '../Components/userItem';
 
@@ -15,7 +19,6 @@ const MyFriendRequests = props => {
         `http://192.168.1.141:3000/friendRequest/approve/${user_id}/${userNum}`,
       );
       getMyFriendRequest();
-      alert('GOOD🥳');
     } catch (error) {
       alert(error);
     }
@@ -26,9 +29,7 @@ const MyFriendRequests = props => {
       const friends = await axios.get(
         `http://192.168.1.141:3000/friendRequest/recievedRequests/${userConfig.user_id}`,
       );
-      if (friends.data.hasOwnProperty('msg')) {
-        alert(friends.data.msg); // there are no connections?
-      } else {
+      if (!friends.data.hasOwnProperty('msg')) {
         setlistOfConf([...friends.data]);
       }
     } catch (error) {
@@ -40,18 +41,9 @@ const MyFriendRequests = props => {
   }, []);
 
   return (
-    <View
-      style={{
-        padding: 20,
-        elevation: 10,
-        backgroundColor: '#ffff',
-        height: '80%',
-        width: '90%',
-        marginTop: 80,
-        alignSelf: 'center',
-      }}>
+    <View style={styles.container}>
       <Pressable
-        style={{height: 30, width: 30, alignSelf: 'flex-start'}}
+        style={styles.pressable}
         onPress={() => props.setVisible(false)}>
         <Text>X</Text>
       </Pressable>
@@ -70,5 +62,22 @@ const MyFriendRequests = props => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    elevation: 10,
+    backgroundColor: '#ffff',
+    height: '80%',
+    width: '90%',
+    marginTop: 80,
+    alignSelf: 'center',
+  },
+  pressable: {
+    height: 30,
+    width: 30,
+    alignSelf: 'flex-start',
+  },
+});
 
 export default MyFriendRequests;

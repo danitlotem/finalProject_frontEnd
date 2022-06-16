@@ -48,6 +48,17 @@ const styles = StyleSheet.create({
     elevation: 10,
     alignSelf: 'center',
   },
+  openFiltersContainer: {
+    height: 50,
+    width: 150,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  openFiltersText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    left: 10,
+  },
 });
 
 export default styles;

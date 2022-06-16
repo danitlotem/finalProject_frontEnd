@@ -1,6 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Button, Pressable} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import {useState, useEffect} from 'react';
+import {View, Text, Pressable} from 'react-native';
+import {useDispatch} from 'react-redux';
 import styles from '../Styles/LogInStyle';
 import axios from 'axios';
 import TInput from '../Components/TInput';
@@ -30,9 +33,11 @@ const LogIn = ({navigation}) => {
 
   useEffect(() => {
     onLoadingPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const validateEmail = () => {
+    // eslint-disable-next-line no-useless-escape
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(email) === false) {
       setValidEmail(false);
@@ -54,7 +59,9 @@ const LogIn = ({navigation}) => {
         device_token: deviceToken,
       });
 
+      // eslint-disable-next-line no-prototype-builtins
       if (response.data.hasOwnProperty('msg')) {
+        // eslint-disable-next-line no-alert
         alert(response.data.msg);
       } else {
         try {
@@ -74,22 +81,25 @@ const LogIn = ({navigation}) => {
             fullName: `${getUser.data[0].first_name} ${getUser.data[0].last_name}`,
             token: response.data.token,
           });
-          // const socket = new WebSocket('ws://192.168.1.141:3000', {
-          //   headers: {
-          //     Authorization: 'Bearer ' + response.data.token,
-          //   },
-          // });
-          // socket.onopen = () => {
-          //   // connection opened
-          //   socket.send('something'); // send a message
-          // };
-          console.log('IN');
+          console.log('Token', response.data.token);
+          const socket = new WebSocket('ws://192.168.1.141:3000', null, {
+            headers: {
+              authorization: 'Bearer ' + response.data.token,
+            },
+          });
+          socket.onopen = () => {
+            // connection opened
+            socket.send('something'); // send a message
+          };
+          console.log(socket);
           navigation.navigate('HomeStack');
         } catch (error) {
+          // eslint-disable-next-line no-alert
           alert(error);
         }
       }
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert(error);
     }
   };
@@ -117,15 +127,13 @@ const LogIn = ({navigation}) => {
         />
       </View>
       <View style={styles.linkToRegister}>
-        <Text style={{color: '#FFFFFF'}}>Don't have a user? </Text>
+        <Text style={styles.dontHaveAUser}>Don`t have a user? </Text>
         <Pressable
           style={({pressed}) => ({
             backgroundColor: pressed ? 'lightskyblue' : '#61AF9B',
           })}
           onPress={reDirectToRegister}>
-          <Text style={{color: '#005252', fontWeight: 'bold'}}>
-            Create an account
-          </Text>
+          <Text style={styles.createAnAcountText}>Create an account</Text>
         </Pressable>
       </View>
       <View style={styles.buttonSection}>
@@ -135,15 +143,7 @@ const LogIn = ({navigation}) => {
           onPress={() => {
             onSubmitFormHandler();
           }}>
-          <Text
-            style={{
-              alignSelf: 'center',
-              fontSize: 18,
-              fontWeight: 'bold',
-              color: '#FFFFFF',
-            }}>
-            Continue
-          </Text>
+          <Text style={styles.buttonText}>Continue</Text>
         </Pressable>
       </View>
     </View>

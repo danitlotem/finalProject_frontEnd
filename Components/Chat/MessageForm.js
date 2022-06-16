@@ -7,7 +7,6 @@ import {TextInput} from 'react-native-paper';
 
 const MessageForm = () => {
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
 
   const HandleSubmit = event => {
     setValue('');

@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
   },
+  itemsContainer: {
+    alignItems: 'center',
+  },
   item: {
     backgroundColor: '#B0D0D9',
     width: '90%',
@@ -61,7 +64,18 @@ const styles = StyleSheet.create({
     color: '#105A87',
     fontWeight: 'bold',
   },
-  textClearBtn: {color: 'white', fontSize: 18},
+  textClearBtn: {
+    color: 'white',
+    fontSize: 18,
+  },
+  iconItem: {
+    backgroundColor: '#65B0C6',
+    borderRadius: 18,
+    padding: 4,
+  },
+  row: {
+    flexDirection: 'row',
+  },
 });
 
 export default styles;

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, Image, Pressable} from 'react-native';
-import {List} from 'react-native-paper';
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import {View, Text} from 'react-native';
 
-const Settings = ({navigation}) => {
+const Settings = () => {
   return (
     <View>
       <Text>SETTINGS PAGE</Text>

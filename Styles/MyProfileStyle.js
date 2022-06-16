@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
     width: Theme.width,
     backgroundColor: Theme.background,
   },
+  photosContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
   scroll: {
     height: '85%',
   },
@@ -77,18 +82,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   birthday: {
-    marginTop: 100,
+    marginTop: 30,
     flexDirection: 'column',
     left: 40,
   },
-  Hobbies: {
-    flexDirection: 'column',
-    padding: 7,
-    alignItems: 'center',
-    top: 20,
-    marginBottom: 120,
+  datePicker: {
+    width: '80%',
+    marginTop: 10,
   },
-
+  hobbies: {
+    marginTop: 30,
+    flexDirection: 'column',
+    left: 40,
+  },
+  hobbiesText: {
+    color: '#0E6070',
+    alignSelf: 'flex-start',
+  },
   subText: {
     alignSelf: 'center',
   },
@@ -101,19 +111,18 @@ const styles = StyleSheet.create({
   Pressables: {
     backgroundColor: 'white',
     borderRadius: 5,
-    marginLeft: 38,
     justifyContent: 'center',
     height: 35,
-    width: 250,
+    width: '80%',
+    marginTop: 10,
+    marginBottom: 30,
   },
   chipsBlocks: {
-    top: 10,
     left: 20,
     justifyContent: 'space-evenly',
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '90%',
-    height: 80,
   },
   dateIcon: {
     position: 'absolute',
@@ -126,6 +135,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
   },
+  column: {
+    flexDirection: 'column',
+  },
+  catagoryText: {
+    left: 40,
+    marginTop: 15,
+    color: '#0E6070',
+  },
+  selectedChip: {},
 });
 
 export default styles;
