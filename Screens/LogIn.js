@@ -14,9 +14,9 @@ const LogIn = ({navigation}) => {
   const [deviceToken, setDeviceToken] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  const baseUrl = 'http://192.168.1.141:3000/auth/login';
-  const userConf = 'http://192.168.1.141:3000/userConfiguration/';
-  const setsURL = 'http://192.168.1.141:3000/dataFromSetsToClient';
+  const baseUrl = 'http://192.168.1.112:3000/auth/login';
+  const userConf = 'http://192.168.1.112:3000/userConfiguration/';
+  const setsURL = 'http://192.168.1.112:3000/dataFromSetsToClient';
 
   const dispatch = useDispatch();
   const onLoadingPage = async event => {
@@ -59,6 +59,7 @@ const LogIn = ({navigation}) => {
         device_token: deviceToken,
       });
 
+      console.log('HERE!!!');
       // eslint-disable-next-line no-prototype-builtins
       if (response.data.hasOwnProperty('msg')) {
         // eslint-disable-next-line no-alert
@@ -105,7 +106,7 @@ const LogIn = ({navigation}) => {
   };
 
   const reDirectToRegister = () => {
-    navigation.navigate('SignUp1');
+    navigation.navigate('SignUp');
   };
   return (
     <View style={styles.container}>
